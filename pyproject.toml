@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "worldtime"
+version = "0.2.0"
+description = "WorldTime is a modern, colorful Python CLI utility for global time zone lookup, comparison, and management. It supports fuzzy search, favorites, city comparison, meeting time conversion, and a live/watch mode"
+authors = [
+    { name = "Savitoj Singh", email = "savv@duck.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.7"
+dependencies = [
+    "rich",
+    "python-dateutil",
+    "thefuzz",
+    "pytz; python_version < '3.9'"
+]
+
+[project.urls]
+Homepage = "https://github.com/savitojs/worldtime"
+Repository = "https://github.com/savitojs/worldtime"
+"Bug Tracker" = "https://github.com/savitojs/worldtime/issues"
+Documentation = "https://github.com/savitojs/worldtime#readme"
+
+[project.scripts]
+worldtime = "worldtime.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["worldtime*"]
+exclude = ["perf*", "assets*"]
