@@ -1,0 +1,645 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: ./demo.sh
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /home/savsingh/personal/tz/assets
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 205
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 23
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: Terminalizer
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+  
+  # The size of the font
+  fontSize: 12
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+  
+# Records, feel free to edit them
+records:
+  - delay: 275
+    content: "\e[0;35m\U0001F310 Welcome to gtime - Global Time Utility Demo!\e[0m\r\n\e[0;36m===============================================\e[0m\r\n"
+  - delay: 1991
+    content: "\r\n\e[0;36m=== \U0001F4CD Basic City Lookup ===\e[0m\r\n"
+  - delay: 1002
+    content: "\e[0;32mLet's check the current time in London:\e[0m\r\n$ g"
+  - delay: 33
+    content: t
+  - delay: 33
+    content: i
+  - delay: 33
+    content: m
+  - delay: 33
+    content: e
+  - delay: 32
+    content: ' '
+  - delay: 32
+    content: L
+  - delay: 31
+    content: o
+  - delay: 33
+    content: 'n'
+  - delay: 33
+    content: d
+  - delay: 32
+    content: o
+  - delay: 32
+    content: 'n'
+  - delay: 33
+    content: "\r\n"
+  - delay: 108
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n╭──────────── Good night! ────────────╮\r\n│  \e[1;36m\U0001F3A1 London, UK\e[0m                      │\r\n│  \e[32mTuesday, July 08, 2025\e[0m             │\r\n│  \e[33m04:05 AM \U0001F319  (\e[0m\e[37mUTC+1\e[0m\e[33m)\e[0m               │\r\n│                                     │\r\n│  \e[3;35mMidnight snack time in London? \U0001F355\e[0m  │\r\n╰─────────────────────────────────────╯\r\n"
+  - delay: 3017
+    content: "\r\n\e[0;36m=== \U0001F31F Adding Favorite Cities ===\e[0m\r\n"
+  - delay: 1003
+    content: "\e[0;32mLet's add some cities to our favorites:\e[0m\r\n$ g"
+  - delay: 31
+    content: t
+  - delay: 32
+    content: i
+  - delay: 32
+    content: m
+  - delay: 31
+    content: e
+  - delay: 31
+    content: ' '
+  - delay: 32
+    content: a
+  - delay: 31
+    content: d
+  - delay: 31
+    content: d
+  - delay: 32
+    content: ' '
+  - delay: 33
+    content: T
+  - delay: 32
+    content: o
+  - delay: 31
+    content: k
+  - delay: 31
+    content: 'y'
+  - delay: 32
+    content: o
+  - delay: 31
+    content: "\r\n"
+  - delay: 102
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n\e[32mAdded Tokyo to favorites!\e[0m\r\n"
+  - delay: 1015
+    content: $ g
+  - delay: 33
+    content: t
+  - delay: 33
+    content: i
+  - delay: 32
+    content: m
+  - delay: 32
+    content: e
+  - delay: 31
+    content: ' '
+  - delay: 32
+    content: a
+  - delay: 32
+    content: d
+  - delay: 33
+    content: d
+  - delay: 32
+    content: ' '
+  - delay: 33
+    content: '"'
+  - delay: 33
+    content: 'N'
+  - delay: 34
+    content: e
+  - delay: 33
+    content: w
+  - delay: 34
+    content: ' '
+  - delay: 31
+    content: 'Y'
+  - delay: 32
+    content: o
+  - delay: 31
+    content: r
+  - delay: 31
+    content: k
+  - delay: 32
+    content: '"'
+  - delay: 31
+    content: "\r\n"
+  - delay: 96
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n\e[32mAdded New York to favorites!\e[0m\r\n"
+  - delay: 1016
+    content: $ g
+  - delay: 31
+    content: t
+  - delay: 31
+    content: i
+  - delay: 31
+    content: m
+  - delay: 32
+    content: e
+  - delay: 31
+    content: ' '
+  - delay: 31
+    content: a
+  - delay: 32
+    content: d
+  - delay: 32
+    content: d
+  - delay: 32
+    content: ' '
+  - delay: 32
+    content: S
+  - delay: 32
+    content: 'y'
+  - delay: 32
+    content: d
+  - delay: 33
+    content: 'n'
+  - delay: 33
+    content: e
+  - delay: 33
+    content: 'y'
+  - delay: 33
+    content: "\r\n"
+  - delay: 100
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n\e[32mAdded Sydney to favorites!\e[0m\r\n"
+  - delay: 1017
+    content: $ g
+  - delay: 32
+    content: t
+  - delay: 31
+    content: i
+  - delay: 32
+    content: m
+  - delay: 32
+    content: e
+  - delay: 33
+    content: ' '
+  - delay: 33
+    content: a
+  - delay: 32
+    content: d
+  - delay: 33
+    content: d
+  - delay: 32
+    content: ' '
+  - delay: 33
+    content: M
+  - delay: 31
+    content: u
+  - delay: 32
+    content: m
+  - delay: 32
+    content: b
+  - delay: 32
+    content: a
+  - delay: 31
+    content: i
+  - delay: 32
+    content: "\r\n"
+  - delay: 122
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n\e[32mAdded Mumbai to favorites!\e[0m\r\n"
+  - delay: 2019
+    content: "\r\n\e[0;36m=== \U0001F4CB Viewing Our Favorites ===\e[0m\r\n"
+  - delay: 1003
+    content: "\e[0;32mNow let's see all our favorite cities at once:\e[0m\r\n$ g"
+  - delay: 31
+    content: t
+  - delay: 32
+    content: i
+  - delay: 31
+    content: m
+  - delay: 32
+    content: e
+  - delay: 31
+    content: ' '
+  - delay: 32
+    content: l
+  - delay: 31
+    content: i
+  - delay: 31
+    content: s
+  - delay: 32
+    content: t
+  - delay: 31
+    content: "\r\n"
+  - delay: 98
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n                                                                                         \e[1;35;46m\U0001F30D GLOBAL TIME FAVORITES \U0001F30D\e[0m                                                                                         \r\n"
+  - delay: 6
+    content: "\e[95m╭─\e[0m\e[95m─────────────────────────────────────────────────────────────────────────────────────────\e[0m\e[95m \e[0m\e[1;35mYour Favorite Cities\e[0m\e[95m \e[0m\e[95m──────────────────────────────────────────────────────────────────────────────────────────\e[0m\e[95m─╮\e[0m\r\n\e[95m│\e[0m ╭──────┬───────────────────┬─────────────────────────┬──────────────────┬────────────╮                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1mFlag\e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mCity             \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mLocal Time             \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mPhase           \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mUTC Offset\e[0m\e[1m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F5FC \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mTokyo, Japan     \e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 12:05 PM \U0001F55B\e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m☀️ Good afternoon\e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+9     \e[0m\e[33m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F5FD \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mNew York, USA    \e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mMon, Jul 07 11:05 PM \U0001F570️ \e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m\U0001F319 Good night   \e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC-4     \e[0m\e[33m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F998 \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mSydney, Australia\e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 01:05 PM \U0001F570️ \e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m☀️ Good afternoon\e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+10    \e[0m\e[33m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F307 \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mMumbai, India    \e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 08:35 AM \U0001F557\e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m\U0001F305 Good morning \e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+5:30  \e[0m\e[33m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ╰──────┴───────────────────┴─────────────────────────┴──────────────────┴────────────╯                                                                                                                    \e[95m│\e[0m\r\n\e[95m╰─\e[0m\e[95m────────────────────────────────────────────────────────────────────────────\e[0m\e[95m \e[0m\e[3;36mSome countries have 30 or 45 minute offsets! ⏰\e[0m\e[95m \e[0m\e[95m────────────────────────────────────────────────────────────────────────────\e[0m\e[95m─╯\e[0m\r\n"
+  - delay: 3022
+    content: "\r\n\e[0;36m=== ⚖️ Comparing Multiple Cities ===\e[0m\r\n"
+  - delay: 1002
+    content: "\e[0;32mLet's compare times across different cities:\e[0m\r\n$ g"
+  - delay: 32
+    content: t
+  - delay: 32
+    content: i
+  - delay: 31
+    content: m
+  - delay: 32
+    content: e
+  - delay: 33
+    content: ' '
+  - delay: 32
+    content: c
+  - delay: 31
+    content: o
+  - delay: 31
+    content: m
+  - delay: 32
+    content: p
+  - delay: 31
+    content: a
+  - delay: 32
+    content: r
+  - delay: 33
+    content: e
+  - delay: 32
+    content: ' '
+  - delay: 32
+    content: L
+  - delay: 31
+    content: o
+  - delay: 32
+    content: 'n'
+  - delay: 32
+    content: d
+  - delay: 32
+    content: o
+  - delay: 31
+    content: 'n'
+  - delay: 32
+    content: ' '
+  - delay: 31
+    content: T
+  - delay: 32
+    content: o
+  - delay: 32
+    content: k
+  - delay: 33
+    content: 'y'
+  - delay: 32
+    content: o
+  - delay: 31
+    content: ' '
+  - delay: 31
+    content: '"'
+  - delay: 31
+    content: 'N'
+  - delay: 32
+    content: e
+  - delay: 33
+    content: w
+  - delay: 32
+    content: ' '
+  - delay: 31
+    content: 'Y'
+  - delay: 32
+    content: o
+  - delay: 32
+    content: r
+  - delay: 32
+    content: k
+  - delay: 32
+    content: '"'
+  - delay: 32
+    content: ' '
+  - delay: 31
+    content: S
+  - delay: 32
+    content: 'y'
+  - delay: 32
+    content: d
+  - delay: 32
+    content: 'n'
+  - delay: 31
+    content: e
+  - delay: 32
+    content: 'y'
+  - delay: 31
+    content: "\r\n"
+  - delay: 110
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n"
+  - delay: 5
+    content: "\e[3m                                 \e[0m\e[1;3;35mGlobal Time Compare\e[0m\e[3m                                  \e[0m\r\n╭──────┬───────────────────┬─────────────────────────┬──────────────────┬────────────╮\r\n│\e[1m \e[0m\e[1mFlag\e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mCity             \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mLocal Time             \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mPhase           \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mUTC Offset\e[0m\e[1m \e[0m│\r\n├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤\r\n│\e[1m \e[0m\e[1m \U0001F3A1 \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mLondon, UK       \e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 04:05 AM \U0001F553\e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m\U0001F319 Good night   \e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+1     \e[0m\e[33m \e[0m│\r\n├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤\r\n│\e[1m \e[0m\e[1m \U0001F5FC \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mTokyo, Japan     \e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 12:05 PM \U0001F55B\e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m☀️ Good afternoon\e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+9     \e[0m\e[33m \e[0m│\r\n├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤\r\n│\e[1m \e[0m\e[1m \U0001F5FD \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mNew York, USA    \e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mMon, Jul 07 11:05 PM \U0001F570️ \e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m\U0001F319 Good night   \e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC-4     \e[0m\e[33m \e[0m│\r\n├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤\r\n│\e[1m \e[0m\e[1m \U0001F998 \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mSydney, Australia\e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 01:05 PM \U0001F570️ \e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m☀️ Good afternoon\e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+10    \e[0m\e[33m \e[0m│\r\n╰──────┴───────────────────┴─────────────────────────┴──────────────────┴────────────╯\r\n"
+  - delay: 3031
+    content: "\r\n\e[0;36m=== \U0001F91D Meeting Time Planning ===\e[0m\r\n"
+  - delay: 1004
+    content: "\e[0;32mPlanning a meeting? Let's see what 3:00 PM London time is everywhere:\e[0m\r\n$ g"
+  - delay: 33
+    content: t
+  - delay: 31
+    content: i
+  - delay: 32
+    content: m
+  - delay: 31
+    content: e
+  - delay: 32
+    content: ' '
+  - delay: 32
+    content: m
+  - delay: 33
+    content: e
+  - delay: 33
+    content: e
+  - delay: 31
+    content: t
+  - delay: 33
+    content: i
+  - delay: 33
+    content: 'n'
+  - delay: 31
+    content: g
+  - delay: 32
+    content: ' '
+  - delay: 32
+    content: a
+  - delay: 31
+    content: t
+  - delay: 32
+    content: ' '
+  - delay: 31
+    content: '3'
+  - delay: 32
+    content: ':'
+  - delay: 31
+    content: '0'
+  - delay: 31
+    content: '0'
+  - delay: 32
+    content: ' '
+  - delay: 31
+    content: P
+  - delay: 31
+    content: M
+  - delay: 32
+    content: "\r\n"
+  - delay: 103
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n                                                                                         \e[1;35;46m\U0001F30D GLOBAL TIME FAVORITES \U0001F30D\e[0m                                                                                         \r\n"
+  - delay: 6
+    content: "\e[95m╭─\e[0m\e[95m─────────────────────────────────────────────────────────────────────────────────────────\e[0m\e[95m \e[0m\e[1;35mYour Favorite Cities\e[0m\e[95m \e[0m\e[95m──────────────────────────────────────────────────────────────────────────────────────────\e[0m\e[95m─╮\e[0m\r\n\e[95m│\e[0m ╭──────┬───────────────────┬─────────────────────────┬──────────────────┬────────────╮                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1mFlag\e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mCity             \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mLocal Time             \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mPhase           \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mUTC Offset\e[0m\e[1m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F5FC \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mTokyo, Japan     \e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 04:00 AM \U0001F553\e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m\U0001F319 Good night   \e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+9     \e[0m\e[33m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F5FD \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mNew York, USA    \e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mMon, Jul 07 03:00 PM \U0001F570️ \e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m☀️ Good afternoon\e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC-4     \e[0m\e[33m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F998 \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mSydney, Australia\e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 05:00 AM \U0001F554\e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m\U0001F305 Good morning \e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+10    \e[0m\e[33m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────────┼─────────────────────────┼──────────────────┼────────────┤                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F307 \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mMumbai, India    \e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 12:30 AM \U0001F570️ \e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m\U0001F319 Good night   \e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+5:30  \e[0m\e[33m \e[0m│                                                                                                                    \e[95m│\e[0m\r\n\e[95m│\e[0m ╰──────┴───────────────────┴─────────────────────────┴──────────────────┴────────────╯                                                                                                                    \e[95m│\e[0m\r\n\e[95m╰─\e[0m\e[95m────────────────────────────────────────────────────────────────────────\e[0m\e[95m \e[0m\e[3;36mThe world is a beautiful place—enjoy every timezone! \U0001F30F\e[0m\e[95m \e[0m\e[95m────────────────────────────────────────────────────────────────────────\e[0m\e[95m─╯\e[0m\r\n"
+  - delay: 3018
+    content: "\r\n\e[0;36m=== \U0001F50D Fuzzy Search Demo ===\e[0m\r\n"
+  - delay: 1001
+    content: "\e[0;32mFuzzy search makes finding cities easy - let's search for 'par':\e[0m\r\n$ g"
+  - delay: 33
+    content: t
+  - delay: 32
+    content: i
+  - delay: 32
+    content: m
+  - delay: 32
+    content: e
+  - delay: 31
+    content: ' '
+  - delay: 32
+    content: p
+  - delay: 32
+    content: a
+  - delay: 31
+    content: r
+  - delay: 32
+    content: "\r\n"
+  - delay: 129
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n"
+  - delay: 20
+    content: "╭────────────────────── Good night! ───────────────────────╮\r\n│  \e[1;36m\U0001F333 Asunción, Paraguay\e[0m                                   │\r\n│  \e[32mTuesday, July 08, 2025\e[0m                                  │\r\n│  \e[33m12:05 AM \U0001F319  (\e[0m\e[37mUTC-3\e[0m\e[33m)\e[0m                                    │\r\n│                                                          │\r\n│  \e[3;35mIt's late in Asunción. Don't let the bed bugs bite! \U0001F6CC\e[0m  │\r\n╰──────────────────────────────────────────────────────────╯\r\n"
+  - delay: 3037
+    content: "\r\n\e[0;36m=== \U0001F9F9 Managing Favorites ===\e[0m\r\n"
+  - delay: 1001
+    content: "\e[0;32mLet's clean up some of our favorites:\e[0m\r\n$ g"
+  - delay: 32
+    content: t
+  - delay: 31
+    content: i
+  - delay: 32
+    content: m
+  - delay: 31
+    content: e
+  - delay: 31
+    content: ' '
+  - delay: 32
+    content: r
+  - delay: 32
+    content: e
+  - delay: 31
+    content: m
+  - delay: 32
+    content: o
+  - delay: 31
+    content: v
+  - delay: 31
+    content: e
+  - delay: 32
+    content: ' '
+  - delay: 31
+    content: T
+  - delay: 31
+    content: o
+  - delay: 32
+    content: k
+  - delay: 31
+    content: 'y'
+  - delay: 32
+    content: o
+  - delay: 31
+    content: "\r\n"
+  - delay: 101
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n\e[32mRemoved Tokyo from favorites.\e[0m\r\n"
+  - delay: 1016
+    content: $ g
+  - delay: 34
+    content: t
+  - delay: 33
+    content: i
+  - delay: 32
+    content: m
+  - delay: 32
+    content: e
+  - delay: 32
+    content: ' '
+  - delay: 34
+    content: r
+  - delay: 31
+    content: e
+  - delay: 32
+    content: m
+  - delay: 32
+    content: o
+  - delay: 31
+    content: v
+  - delay: 31
+    content: e
+  - delay: 32
+    content: ' '
+  - delay: 31
+    content: S
+  - delay: 31
+    content: 'y'
+  - delay: 32
+    content: d
+  - delay: 33
+    content: 'n'
+  - delay: 33
+    content: e
+  - delay: 33
+    content: 'y'
+  - delay: 31
+    content: "\r\n"
+  - delay: 112
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n\e[32mRemoved Sydney from favorites.\e[0m\r\n"
+  - delay: 2023
+    content: "\e[0;32mFinal favorites list:\e[0m\r\n$ g"
+  - delay: 34
+    content: t
+  - delay: 31
+    content: i
+  - delay: 32
+    content: m
+  - delay: 31
+    content: e
+  - delay: 32
+    content: ' '
+  - delay: 31
+    content: l
+  - delay: 32
+    content: i
+  - delay: 31
+    content: s
+  - delay: 32
+    content: t
+  - delay: 32
+    content: "\r\n"
+  - delay: 117
+    content: "\e[1;34mGood night, savsingh! Welcome to Global Time Utility \U0001F310\e[0m\r\n                                                                                         \e[1;35;46m\U0001F30D GLOBAL TIME FAVORITES \U0001F30D\e[0m                                                                                         \r\n\e[95m╭─\e[0m\e[95m─────────────────────────────────────────────────────────────────────────────────────────\e[0m\e[95m \e[0m\e[1;35mYour Favorite Cities\e[0m\e[95m \e[0m\e[95m──────────────────────────────────────────────────────────────────────────────────────────\e[0m\e[95m─╮\e[0m\r\n\e[95m│\e[0m ╭──────┬───────────────┬─────────────────────────┬─────────────────┬────────────╮                                                                                                                         \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1mFlag\e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mCity         \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mLocal Time             \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mPhase          \e[0m\e[1m \e[0m│\e[1m \e[0m\e[1mUTC Offset\e[0m\e[1m \e[0m│                                                                                                                         \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────┼─────────────────────────┼─────────────────┼────────────┤                                                                                                                         \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F5FD \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mNew York, USA\e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mMon, Jul 07 11:05 PM \U0001F570️ \e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m\U0001F319 Good night  \e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC-4     \e[0m\e[33m \e[0m│                                                                                                                         \e[95m│\e[0m\r\n\e[95m│\e[0m ├──────┼───────────────┼─────────────────────────┼─────────────────┼────────────┤                                                                                                                         \e[95m│\e[0m\r\n\e[95m│\e[0m │\e[1m \e[0m\e[1m \U0001F307 \e[0m\e[1m \e[0m│\e[1;36m \e[0m\e[1;36mMumbai, India\e[0m\e[1;36m \e[0m│\e[32m \e[0m\e[32mTue, Jul 08 08:35 AM \U0001F557\e[0m\e[32m \e[0m│\e[35m \e[0m\e[35m\U0001F305 Good morning\e[0m\e[35m \e[0m│\e[33m \e[0m\e[33mUTC+5:30  \e[0m\e[33m \e[0m│                                                                                                                         \e[95m│\e[0m\r\n\e[95m│\e[0m ╰──────┴───────────────┴─────────────────────────┴─────────────────┴────────────╯                                                                                                                         \e[95m│\e[0m\r\n\e[95m╰─\e[0m\e[95m───────────────────────────────────────────────────────────────────\e[0m\e[95m \e[0m\e[3;36mAustralia's Lord Howe Island has a 30-minute daylight saving! ⏰\e[0m\e[95m \e[0m\e[95m────────────────────────────────────────────────────────────────────\e[0m\e[95m─╯\e[0m\r\n"
+  - delay: 3019
+    content: "\r\n\e[0;36m=== ❓ Getting Help ===\e[0m\r\n"
+  - delay: 1003
+    content: "\e[0;32mNeed help? Here's the complete help menu:\e[0m\r\n$ g"
+  - delay: 33
+    content: t
+  - delay: 33
+    content: i
+  - delay: 32
+    content: m
+  - delay: 32
+    content: e
+  - delay: 33
+    content: ' '
+  - delay: 31
+    content: '-'
+  - delay: 32
+    content: '-'
+  - delay: 33
+    content: h
+  - delay: 32
+    content: e
+  - delay: 31
+    content: l
+  - delay: 31
+    content: p
+  - delay: 32
+    content: "\r\n"
+  - delay: 124
+    content: "\r\n\e[1;36mgtime - Global Time Utility\e[0m\r\n\r\n\e[1;33mUsage:\e[0m\r\n  gtime  \r\n  gtime \e[1m<\e[0m\e[1;95mcity\e[0m\e[39m name>\e[0m\r\n\r\n\e[1;33mCommands:\e[0m\r\n\e[39m  \e[0m\e[32madd <city>\e[0m\e[39m         Add a city to your favorites\e[0m\r\n\e[39m  \e[0m\e[32mremove <city>\e[0m\e[39m      Remove a city from your favorites\e[0m\r\n\e[39m  \e[0m\e[32mlist\e[0m\e[39m               List your favorite cities and their current times\e[0m\r\n\e[39m  \e[0m\e[32mlist --watch\e[0m\e[39m       Watch mode: continuously refresh your favorites list every \e[0m\e[1;36m60\e[0m\e[39m seconds\e[0m\r\n\e[39m  \e[0m\e[32mmeeting at \e[0m\e[32m/\e[0m\e[32m on <time>\e[0m\e[39m  Show favorite cities' times for a meeting \e[0m\e[1;39m(\e[0m\e[39me.g. \e[0m\e[32m'meeting at 10:00 AM'\e[0m\e[39m or \e[0m\e[32m'meeting on 10:00 AM'\e[0m\e[1;39m)\e[0m\r\n\e[39m  \e[0m\e[32mcompare <city1> <city2> \e[0m\e[32m...\e[0m\e[39m  Compare times for multiple cities\e[0m\r\n\e[39m  \e[0m\e[32mcompare <city1> <city2> \e[0m\e[32m...\e[0m\e[32m --watch\e[0m\e[39m  Watch mode: continuously refresh city comparison\e[0m\r\n\e[39m  \e[0m\e[32mwatch\e[0m\e[39m              Same as \e[0m\e[32m'list --watch'\e[0m\e[39m - watch your favorites in real-time\e[0m\r\n\e[39m  \e[0m\e[32m<city name\e[0m\e[1;32m>\e[0m        Show the current time for any city \e[1m(\e[0mfuzzy search supported\e[1m)\e[0m\r\n  \e[32m-h, --help\e[0m         Show this help message\r\n\r\n\e[1;33mWatch Mode:\e[0m\r\n  Use \e[32m--watch\e[0m with list or compare commands, or use \e[32mwatch\e[0m alone to continuously \r\n  refresh the display every \e[1;36m60\e[0m seconds with a live countdown timer. Press Ctrl+C to exit.\r\n\r\n"
+  - delay: 3015
+    content: "\r\n\e[0;36m=== ✨ That's gtime! ===\e[0m\r\n"
+  - delay: 1004
+    content: "\e[1;33mYour global time companion for the terminal\e[0m\r\n\e[0;34m\U0001F4E6 Install with: \e[0;32mpip install gtime\e[0m\r\n\e[0;35m\U0001F30D Happy time zone hopping!\e[0m\r\n"
