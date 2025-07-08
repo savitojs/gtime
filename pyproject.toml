@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gtime"
+version = "0.3.1"
+description = "Global Time Utility (gtime) - A modern, colorful Python CLI utility for global time zone lookup, comparison, and management. It supports fuzzy search, favorites, city comparison, meeting time conversion, and a live/watch mode"
+authors = [
+    { name = "Savitoj Singh", email = "savv@duck.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.7"
+dependencies = [
+    "rich",
+    "python-dateutil",
+    "thefuzz",
+    "pytz; python_version < '3.9'"
+]
+
+[project.urls]
+Homepage = "https://github.com/savitojs/gtime"
+Repository = "https://github.com/savitojs/gtime"
+"Bug Tracker" = "https://github.com/savitojs/gtime/issues"
+Documentation = "https://github.com/savitojs/gtime#readme"
+
+[project.scripts]
+gtime = "gtime.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["gtime*"]
+exclude = ["perf*", "assets*"]
