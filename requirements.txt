@@ -1,0 +1,5 @@
+rich
+python-dateutil
+thefuzz
+pytest
+pytz; python_version<'3.9'
