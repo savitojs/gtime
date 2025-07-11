@@ -90,9 +90,8 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
             offset_str = f'UTC{sign}{abs(hours)}' + (f':{minutes:02}' if minutes else '')
         else:
             offset_str = 'UTC?'
-        clock_emoji = chr(0x1F550 + ((hour-1)%12)) if 1 <= hour <= 12 else '🕰️'
         table.add_row(
-            emoji, f"{city}, {country}", f"{dt.strftime('%a, %b %d %I:%M %p')} {clock_emoji}", f"{emoji_time} {phase}", offset_str
+            emoji, f"{city}, {country}", f"{dt.strftime('%a, %b %d %I:%M %p')}", f"{emoji_time} {phase}", offset_str
         )
     fun_facts = [
         "Did you know? There are 24 time zones in the world! 🌐",
@@ -152,9 +151,8 @@ def print_compare(cities: List[str]):
             offset_str = f'UTC{sign}{abs(hours)}' + (f':{minutes:02}' if minutes else '')
         else:
             offset_str = 'UTC?'
-        clock_emoji = chr(0x1F550 + ((hour-1)%12)) if 1 <= hour <= 12 else '🕰️'
         table.add_row(
-            emoji, f"{city}, {country}", f"{now.strftime('%a, %b %d %I:%M %p')} {clock_emoji}", f"{emoji_time} {phase}", offset_str
+            emoji, f"{city}, {country}", f"{now.strftime('%a, %b %d %I:%M %p')}", f"{emoji_time} {phase}", offset_str
         )
     console.print(table)
 
