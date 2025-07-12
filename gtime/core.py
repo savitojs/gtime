@@ -48,10 +48,38 @@ def _get_city_names():
 def fuzzy_search_city(query: str) -> Optional[Tuple[str, str, str, str]]:
     from thefuzz import process
     names, name_to_idx = _get_city_names()
-    match, score = process.extractOne(query, names)
+    
+    # First priority: exact match (case insensitive)
+    query_lower = query.lower()
+    for name in names:
+        city_name = name.split(" (")[0].lower()
+        if city_name == query_lower:
+            idx = name_to_idx[name]
+            return CITY_DB[idx]
+    
+    # Second priority: starts with (case insensitive)
+    for name in names:
+        city_name = name.split(" (")[0].lower()
+        if city_name.startswith(query_lower):
+            idx = name_to_idx[name]
+            return CITY_DB[idx]
+    
+    # Third priority: substring match (case insensitive)
+    for name in names:
+        city_name = name.split(" (")[0].lower()
+        if query_lower in city_name:
+            idx = name_to_idx[name]
+            return CITY_DB[idx]
+    
+    # Fourth priority: fuzzy match on city names only (not including country)
+    city_names_only = [name.split(" (")[0] for name in names]
+    match, score = process.extractOne(query, city_names_only)
     if score > 60:
-        idx = name_to_idx[match]
-        return CITY_DB[idx]
+        for name in names:
+            if name.split(" (")[0] == match:
+                idx = name_to_idx[name]
+                return CITY_DB[idx]
+    
     return None
 
 @lru_cache(maxsize=256)
@@ -59,19 +87,26 @@ def get_city_by_name(city_name: str) -> Optional[Tuple[str, str, str, str]]:
     for city, country, tz, emoji in CITY_DB:
         if city.lower() == city_name.lower():
             return (city, country, tz, emoji)
-    from thefuzz import process
-    names, name_to_idx = _get_city_names()
-    matches = process.extract(city_name, names, limit=3)
-    if matches and matches[0][1] > 60:
-        idx = name_to_idx[matches[0][0]]
-        return CITY_DB[idx]
-    return None
+    
+    return fuzzy_search_city(city_name)
 
 def suggest_cities(city_name: str) -> List[str]:
     from thefuzz import process
     names, _ = _get_city_names()
-    matches = process.extract(city_name, names, limit=3)
-    suggestions = [m[0] for m in matches if m[1] > 40]
+    
+    # Use city names only for better suggestions
+    city_names_only = [name.split(" (")[0] for name in names]
+    matches = process.extract(city_name, city_names_only, limit=3)
+    
+    # Convert back to full names for suggestions
+    suggestions = []
+    for match, score in matches:
+        if score > 40:
+            for name in names:
+                if name.split(" (")[0] == match:
+                    suggestions.append(name)
+                    break
+    
     return suggestions
 
 def get_time_emoji(hour: int) -> str:

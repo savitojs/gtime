@@ -77,7 +77,14 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
             continue
         city, country, tz, emoji = city_info
         now = datetime.datetime.now(ZoneInfo(tz))
-        dt = meeting_time.astimezone(ZoneInfo(tz)) if meeting_time else now
+        if meeting_time:
+            # Convert meeting time (assumed to be in local timezone) to the city's timezone
+            local_dt = datetime.datetime.now().astimezone()
+            local_tz = local_dt.tzinfo
+            meeting_time_local = meeting_time.replace(tzinfo=local_tz)
+            dt = meeting_time_local.astimezone(ZoneInfo(tz))
+        else:
+            dt = now
         hour = dt.hour
         emoji_time = get_time_emoji(hour)
         phase = get_greeting(hour)
@@ -162,7 +169,6 @@ def watch_mode(func, *args, **kwargs):
             os.system('clear')
             func(*args, **kwargs)
 
-            # Countdown timer for next refresh
             for seconds_left in range(60, 0, -1):
                 console.print(f"[dim]Press Ctrl+C to exit watch mode. Next refresh in {seconds_left} seconds...[/dim]", end="\r")
                 time.sleep(1)
@@ -170,21 +176,66 @@ def watch_mode(func, *args, **kwargs):
     except KeyboardInterrupt:
         console.print("\n[green]Exited watch mode.[/green]")
 
-def parse_meeting_time(args: List[str]) -> Optional[datetime.datetime]:
+def parse_meeting_time(args: List[str]) -> Tuple[Optional[datetime.datetime], Optional[str]]:
     if "at" in args:
         idx = args.index("at")
     elif "on" in args:
         idx = args.index("on")
     else:
-        return None
+        return None, None
     time_str = " ".join(args[idx+1:])
-    try:
-        today = datetime.datetime.now()
-        dt = datetime.datetime.strptime(time_str, "%I:%M %p")
-        meeting_time = today.replace(hour=dt.hour, minute=dt.minute, second=0, microsecond=0)
-        return meeting_time
-    except Exception:
-        return None
+    today = datetime.datetime.now()
+    
+    timezone_spec = None
+    timezone_info = None
+    timezone_aliases = {
+        'UTC': ('UTC', 'Coordinated Universal Time'),
+        'GMT': ('UTC', 'Greenwich Mean Time'),
+        'EST': ('America/New_York', 'Eastern Standard Time'),
+        'EDT': ('America/New_York', 'Eastern Daylight Time'), 
+        'CST': ('America/Chicago', 'Central Standard Time'),
+        'CDT': ('America/Chicago', 'Central Daylight Time'),
+        'MST': ('America/Denver', 'Mountain Standard Time'),
+        'MDT': ('America/Denver', 'Mountain Daylight Time'),
+        'PST': ('America/Los_Angeles', 'Pacific Standard Time'),
+        'PDT': ('America/Los_Angeles', 'Pacific Daylight Time'),
+        'CET': ('Europe/Paris', 'Central European Time'),
+        'CEST': ('Europe/Paris', 'Central European Summer Time'),
+        'JST': ('Asia/Tokyo', 'Japan Standard Time'),
+        'IST': ('Asia/Kolkata', 'India Standard Time'),
+    }
+    
+    parts = time_str.split()
+    if len(parts) > 1 and parts[-1].upper() in timezone_aliases:
+        tz_abbr = parts[-1].upper()
+        timezone_spec, tz_name = timezone_aliases[tz_abbr]
+        timezone_info = f"{tz_name} ({tz_abbr})"
+        time_str = " ".join(parts[:-1])
+    
+    formats = [
+        "%I:%M %p",    # 12-hour format with AM/PM (e.g., "3:30 PM")
+        "%H:%M",       # 24-hour format (e.g., "15:30")
+        "%I %p",       # Hour only with AM/PM (e.g., "3 PM")
+        "%H",          # Hour only 24-hour (e.g., "15")
+    ]
+    
+    for fmt in formats:
+        try:
+            dt = datetime.datetime.strptime(time_str, fmt)
+            meeting_time = today.replace(hour=dt.hour, minute=dt.minute, second=0, microsecond=0)
+            
+            if timezone_spec:
+                from .core import ZoneInfo
+                specified_tz = ZoneInfo(timezone_spec)
+                meeting_time_in_tz = meeting_time.replace(tzinfo=specified_tz)
+                local_meeting_time = meeting_time_in_tz.astimezone()
+                meeting_time = local_meeting_time.replace(tzinfo=None)
+            
+            return meeting_time, timezone_info
+        except (ValueError, Exception):
+            continue
+    
+    return None, None
 
 def print_help():
     help_text = """
@@ -199,7 +250,7 @@ def print_help():
   [green]remove <city>[/green]      Remove a city from your favorites
   [green]list[/green]               List your favorite cities and their current times
   [green]list --watch[/green]       Watch mode: continuously refresh your favorites list every 60 seconds
-  [green]meeting at / on <time>[/green]  Show favorite cities' times for a meeting (e.g. 'meeting at 10:00 AM' or 'meeting on 10:00 AM')
+  [green]meeting at / on <time>[/green]  Show favorite cities' times for a meeting (e.g. 'meeting at 10:00 AM', 'meeting at 15:30 UTC', or 'meeting on 3 PM EST')
   [green]compare <city1> <city2> ...[/green]  Compare times for multiple cities
   [green]compare <city1> <city2> ... --watch[/green]  Watch mode: continuously refresh city comparison
   [green]watch[/green]              Same as 'list --watch' - watch your favorites in real-time
@@ -232,7 +283,6 @@ def main():
 
     cmd = args[0].lower()
 
-    # Watch mode for list and compare
     if cmd == "watch" or (cmd == "list" and len(args) > 1 and args[1] == "--watch"):
         watch_mode(print_favorites, favs)
         return
@@ -275,12 +325,14 @@ def main():
         if len(args) == 1:
             print_favorites(favs)
             return
-        meeting_time = parse_meeting_time(args)
+        meeting_time, timezone_info = parse_meeting_time(args)
         if meeting_time is None:
-            console.print("[red]Invalid meeting command. Use: 'meeting at/on <time>' (e.g. 'meeting at 10:00 AM' or 'meeting on 10:00 AM').[/red]")
+            console.print("[red]Invalid meeting command. Use: 'meeting at/on <time>' (e.g. 'meeting at 10:00 AM', 'meeting at 15:30 UTC', or 'meeting on 3 PM EST').[/red]")
             console.print("[yellow]See 'gtime -h' for help.[/yellow]")
             return
         print_favorites(favs, meeting_time)
+        if timezone_info:
+            console.print(f"\n[dim]✓ Meeting time converted from {timezone_info}[/dim]")
         return
 
     if cmd == "compare" and len(args) > 1:
@@ -306,7 +358,6 @@ def main():
             console.print("[red]No valid cities to compare.[/red]")
         return
 
-    # If command is not recognized, try city lookup, else error
     city_info = get_city_by_name(" ".join(args))
     if city_info:
         print_city_time(*city_info)
