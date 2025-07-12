@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gtime"
-version = "0.3.2"
+version = "0.3.3"
 description = "Global Time Utility (gtime) - A modern, colorful Python CLI utility for global time zone lookup, comparison, and management. It supports fuzzy search, favorites, city comparison, meeting time conversion, and a live/watch mode"
 authors = [
     { name = "Savitoj Singh", email = "savv@duck.com" }
