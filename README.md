@@ -185,10 +185,6 @@ This project includes automated workflows:
 - **🧪 Tests**: Runs on every push/PR across Python 3.8-3.12
 - **📦 Publish**: Automatically publishes to PyPI upon new GitHub release
 
-## 🎨 Screenshots
-
-*Coming soon - we're working on adding more visual examples!*
-
 ## 🤝 Support
 
 - 📖 **Documentation**: Check out our [Wiki](https://github.com/savitojs/gtime/wiki)
