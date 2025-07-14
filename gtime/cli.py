@@ -303,13 +303,13 @@ def main():
                     favs.append(city)
                     # Show mapping if user input differs from resolved city
                     if city_arg.lower() != city.lower():
-                        added_cities.append(f"{city} (searched: {city_arg})")
+                        added_cities.append(f"searched {city_arg}, added its capital city {city}")
                     else:
                         added_cities.append(city)
                 else:
                     # Show mapping if user input differs from resolved city
                     if city_arg.lower() != city.lower():
-                        already_in_favs.append(f"{city} (searched: {city_arg})")
+                        already_in_favs.append(f"searched {city_arg}, its capital city {city} is already in favorites")
                     else:
                         already_in_favs.append(city)
             else:
@@ -317,16 +317,18 @@ def main():
 
         if added_cities:
             save_favorites(favs)
-            if len(added_cities) == 1:
-                console.print(f"[green]Added {added_cities[0]} to favorites![/green]")
-            else:
-                console.print(f"[green]Added {len(added_cities)} cities to favorites: {', '.join(added_cities)}[/green]")
+            for city_msg in added_cities:
+                if city_msg.startswith("searched"):
+                    console.print(f"[green]{city_msg}[/green]")
+                else:
+                    console.print(f"[green]Added {city_msg} to favorites![/green]")
 
         if already_in_favs:
-            if len(already_in_favs) == 1:
-                console.print(f"[yellow]{already_in_favs[0]} is already in favorites.[/yellow]")
-            else:
-                console.print(f"[yellow]{len(already_in_favs)} cities already in favorites: {', '.join(already_in_favs)}[/yellow]")
+            for city_msg in already_in_favs:
+                if city_msg.startswith("searched"):
+                    console.print(f"[yellow]{city_msg}[/yellow]")
+                else:
+                    console.print(f"[yellow]{city_msg} is already in favorites.[/yellow]")
 
         if not_found:
             for city_arg in not_found:
