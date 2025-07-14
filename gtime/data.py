@@ -332,7 +332,7 @@ COUNTRY_CAPITALS = {
     "Canada": "Ottawa",
     "Mexico": "Mexico City",
     "Brazil": "Brasília",
-    "Argentina": "Buenos Aires", 
+    "Argentina": "Buenos Aires",
     "Colombia": "Bogotá",
     "Peru": "Lima",
     "Chile": "Santiago",
