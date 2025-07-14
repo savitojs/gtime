@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Reports
+tests/gtime_comprehensive_test_report.md
+
 # C extensions
 *.so
 

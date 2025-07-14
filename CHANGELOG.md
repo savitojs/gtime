@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.4] - 2025-07-14
+
+### Fixed
+- Fixed sun emoji (☀️) display issues in kitty and ghostty terminals
+- Added automatic terminal detection to use compatible emoji variants
+- Improved emoji rendering compatibility across different terminal emulators
+
+### Changed
+- Optimized terminal compatibility detection logic
+
 ## [0.3.3] - 2025-07-11
 
 ### Added
