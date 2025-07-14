@@ -185,14 +185,14 @@ def parse_meeting_time(args: List[str]) -> Tuple[Optional[datetime.datetime], Op
         return None, None
     time_str = " ".join(args[idx+1:])
     today = datetime.datetime.now()
-    
+
     timezone_spec = None
     timezone_info = None
     timezone_aliases = {
         'UTC': ('UTC', 'Coordinated Universal Time'),
         'GMT': ('UTC', 'Greenwich Mean Time'),
         'EST': ('America/New_York', 'Eastern Standard Time'),
-        'EDT': ('America/New_York', 'Eastern Daylight Time'), 
+        'EDT': ('America/New_York', 'Eastern Daylight Time'),
         'CST': ('America/Chicago', 'Central Standard Time'),
         'CDT': ('America/Chicago', 'Central Daylight Time'),
         'MST': ('America/Denver', 'Mountain Standard Time'),
@@ -204,37 +204,37 @@ def parse_meeting_time(args: List[str]) -> Tuple[Optional[datetime.datetime], Op
         'JST': ('Asia/Tokyo', 'Japan Standard Time'),
         'IST': ('Asia/Kolkata', 'India Standard Time'),
     }
-    
+
     parts = time_str.split()
     if len(parts) > 1 and parts[-1].upper() in timezone_aliases:
         tz_abbr = parts[-1].upper()
         timezone_spec, tz_name = timezone_aliases[tz_abbr]
         timezone_info = f"{tz_name} ({tz_abbr})"
         time_str = " ".join(parts[:-1])
-    
+
     formats = [
         "%I:%M %p",    # 12-hour format with AM/PM (e.g., "3:30 PM")
         "%H:%M",       # 24-hour format (e.g., "15:30")
         "%I %p",       # Hour only with AM/PM (e.g., "3 PM")
         "%H",          # Hour only 24-hour (e.g., "15")
     ]
-    
+
     for fmt in formats:
         try:
             dt = datetime.datetime.strptime(time_str, fmt)
             meeting_time = today.replace(hour=dt.hour, minute=dt.minute, second=0, microsecond=0)
-            
+
             if timezone_spec:
                 from .core import ZoneInfo
                 specified_tz = ZoneInfo(timezone_spec)
                 meeting_time_in_tz = meeting_time.replace(tzinfo=specified_tz)
                 local_meeting_time = meeting_time_in_tz.astimezone()
                 meeting_time = local_meeting_time.replace(tzinfo=None)
-            
+
             return meeting_time, timezone_info
         except (ValueError, Exception):
             continue
-    
+
     return None, None
 
 def print_help():
@@ -246,8 +246,8 @@ def print_help():
   gtime <city name>
 
 [bold yellow]Commands:[/bold yellow]
-  [green]add <city>[/green]         Add a city to your favorites
-  [green]remove <city>[/green]      Remove a city from your favorites
+  [green]add <city> [city2] ...[/green]     Add one or more cities to your favorites
+  [green]remove <city> [city2] ...[/green]  Remove one or more cities from your favorites
   [green]list[/green]               List your favorite cities and their current times
   [green]list --watch[/green]       Watch mode: continuously refresh your favorites list every 60 seconds
   [green]meeting at / on <time>[/green]  Show favorite cities' times for a meeting (e.g. 'meeting at 10:00 AM', 'meeting at 15:30 UTC', or 'meeting on 3 PM EST')
@@ -258,7 +258,7 @@ def print_help():
   [green]-h, --help[/green]         Show this help message
 
 [bold yellow]Watch Mode:[/bold yellow]
-  Use [green]--watch[/green] with list or compare commands, or use [green]watch[/green] alone to continuously 
+  Use [green]--watch[/green] with list or compare commands, or use [green]watch[/green] alone to continuously
   refresh the display every 60 seconds with a live countdown timer. Press Ctrl+C to exit.
 """
     console.print(help_text)
@@ -291,30 +291,76 @@ def main():
         return
 
     if cmd == "add" and len(args) > 1:
-        city_info = get_city_by_name(" ".join(args[1:]))
-        if city_info:
-            city, *_ = city_info
-            if city not in favs:
-                favs.append(city)
-                save_favorites(favs)
-                console.print(f"[green]Added {city} to favorites![/green]")
+        added_cities = []
+        already_in_favs = []
+        not_found = []
+
+        for city_arg in args[1:]:
+            city_info = get_city_by_name(city_arg)
+            if city_info:
+                city, *_ = city_info
+                if city not in favs:
+                    favs.append(city)
+                    # Show mapping if user input differs from resolved city
+                    if city_arg.lower() != city.lower():
+                        added_cities.append(f"{city} (searched: {city_arg})")
+                    else:
+                        added_cities.append(city)
+                else:
+                    # Show mapping if user input differs from resolved city
+                    if city_arg.lower() != city.lower():
+                        already_in_favs.append(f"{city} (searched: {city_arg})")
+                    else:
+                        already_in_favs.append(city)
             else:
-                console.print(f"[yellow]{city} is already in favorites.[/yellow]")
-        else:
-            console.print("[red]City not found.[/red]")
-            suggestions = suggest_cities(" ".join(args[1:]))
-            if suggestions:
-                console.print(f"[yellow]Did you mean:[/yellow] {', '.join(suggestions)}")
+                not_found.append(city_arg)
+
+        if added_cities:
+            save_favorites(favs)
+            if len(added_cities) == 1:
+                console.print(f"[green]Added {added_cities[0]} to favorites![/green]")
+            else:
+                console.print(f"[green]Added {len(added_cities)} cities to favorites: {', '.join(added_cities)}[/green]")
+
+        if already_in_favs:
+            if len(already_in_favs) == 1:
+                console.print(f"[yellow]{already_in_favs[0]} is already in favorites.[/yellow]")
+            else:
+                console.print(f"[yellow]{len(already_in_favs)} cities already in favorites: {', '.join(already_in_favs)}[/yellow]")
+
+        if not_found:
+            for city_arg in not_found:
+                console.print(f"[red]City not found:[/red] {city_arg}")
+                suggestions = suggest_cities(city_arg)
+                if suggestions:
+                    console.print(f"[yellow]Did you mean:[/yellow] {', '.join(suggestions)}")
+
         return
 
     if cmd == "remove" and len(args) > 1:
-        city = " ".join(args[1:])
-        if city in favs:
-            favs.remove(city)
+        removed_cities = []
+        not_in_favs = []
+
+        for city_arg in args[1:]:
+            if city_arg in favs:
+                favs.remove(city_arg)
+                removed_cities.append(city_arg)
+            else:
+                not_in_favs.append(city_arg)
+
+        if removed_cities:
             save_favorites(favs)
-            console.print(f"[green]Removed {city} from favorites.[/green]")
-        else:
-            console.print(f"[yellow]{city} is not in favorites.[/yellow]")
+            if len(removed_cities) == 1:
+                console.print(f"[green]Removed {removed_cities[0]} from favorites.[/green]")
+            else:
+                console.print(f"[green]Removed {len(removed_cities)} cities from favorites: {', '.join(removed_cities)}[/green]")
+
+        if not_in_favs:
+            if len(not_in_favs) == 1:
+                console.print(f"[yellow]{not_in_favs[0]} is not in favorites.[/yellow]")
+            else:
+                console.print(f"[yellow]{len(not_in_favs)} cities not in favorites: {', '.join(not_in_favs)}[/yellow]")
+
         return
 
     if cmd == "list":
