@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.5] - 2025-07-14
+
+### Fixed
+- Change from 'Added Brasília (searched: brazil)' to 'searched brazil, added its capital city Brasília'
+- Change from 'Delhi (searched: India) is already in favorites' to 'searched India, its capital city Delhi is already in favorites'
+- Display each message individually instead of grouping them
+- More conversational and clear about what happened
+- Better user experience when adding countries vs cities
+
 ## [0.3.4] - 2025-07-14
 
 ### Fixed
@@ -36,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Major Feature**: 4-tier fuzzy search algorithm with priority-based matching
   - Exact match (highest priority)
   - Starts with match
-  - Substring match  
+  - Substring match
   - Fuzzy match (lowest priority)
 - **Major Feature**: 24-hour format support for meeting times
   - Support for formats like "15:30", "21:00"
@@ -157,4 +166,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - All changes should be documented in this changelog
 - Follow semantic versioning principles
 - Include tests for new features
-- Update documentation as needed 
+- Update documentation as needed
