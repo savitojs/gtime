@@ -71,6 +71,9 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
     table.add_column("Local Time", style="green")
     table.add_column("Phase", style="magenta")
     table.add_column("UTC Offset", style="yellow")
+    
+    # Collect all city data with offsets for sorting
+    city_data = []
     for fav in favs:
         city_info = get_city_by_name(fav)
         if not city_info:
@@ -95,11 +98,25 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
             minutes = int(abs(total_minutes) % 60)
             sign = '+' if hours >= 0 else '-'
             offset_str = f'UTC{sign}{abs(hours)}' + (f':{minutes:02}' if minutes else '')
+            offset_value = total_minutes  # Use total_minutes for sorting
         else:
             offset_str = 'UTC?'
-        table.add_row(
-            emoji, f"{city}, {country}", f"{dt.strftime('%a, %b %d %I:%M %p')}", f"{emoji_time} {phase}", offset_str
-        )
+            offset_value = float('inf')  # Put unknown offsets at the end
+        city_data.append((
+            offset_value,  # Sort key
+            emoji,
+            f"{city}, {country}",
+            f"{dt.strftime('%a, %b %d %I:%M %p')}",
+            f"{emoji_time} {phase}",
+            offset_str
+        ))
+    
+    # Sort by UTC offset (descending)
+    city_data.sort(key=lambda x: x[0], reverse=True)
+    
+    # Add rows to table from sorted data
+    for _, emoji, city_country, local_time, phase_str, offset_str in city_data:
+        table.add_row(emoji, city_country, local_time, phase_str, offset_str)
     fun_facts = [
         "Did you know? There are 24 time zones in the world! 🌐",
         "UTC stands for Universal Time Coordinated! 🕒",
