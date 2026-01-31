@@ -61,6 +61,22 @@ def get_greeting(hour: int) -> str:
     return "Good night"
 
 
+def get_work_label(hour: int) -> str:
+    if 0 <= hour < 6:
+        return "Sleep"
+    if 6 <= hour < 9:
+        return "Early"
+    if 9 <= hour < 12:
+        return "Work"
+    if 12 <= hour < 14:
+        return "Lunch"
+    if 14 <= hour < 18:
+        return "Work"
+    if 18 <= hour < 22:
+        return "Off"
+    return "Late"
+
+
 def get_funny_footer(city: str, hour: int) -> str:
     night_jokes = [
         f"Sweet dreams, {city}! 😴",
@@ -208,6 +224,20 @@ def format_utc_offset(dt: datetime.datetime) -> str:
     return "UTC?"
 
 
+def format_time_delta(base_dt: datetime.datetime, target_dt: datetime.datetime) -> str:
+    base_offset = base_dt.utcoffset()
+    target_offset = target_dt.utcoffset()
+    if base_offset is None or target_offset is None:
+        return "?"
+    delta_minutes = int((target_offset - base_offset).total_seconds() // 60)
+    sign = "+" if delta_minutes >= 0 else "-"
+    minutes = abs(delta_minutes)
+    hours, mins = divmod(minutes, 60)
+    if mins:
+        return f"{sign}{hours}:{mins:02}"
+    return f"{sign}{hours}"
+
+
 def to_local_aware(dt: datetime.datetime) -> datetime.datetime:
     if dt.tzinfo is not None:
         return dt
@@ -235,6 +265,7 @@ def parse_meeting_time(args: List[str]) -> Tuple[Optional[datetime.datetime], Op
     timezone_aliases = {
         "UTC": ("UTC", "Coordinated Universal Time"),
         "GMT": ("UTC", "Greenwich Mean Time"),
+        "BST": ("Europe/London", "British Summer Time"),
         "EST": ("America/New_York", "Eastern Standard Time"),
         "EDT": ("America/New_York", "Eastern Daylight Time"),
         "CST": ("America/Chicago", "Central Standard Time"),
@@ -243,10 +274,22 @@ def parse_meeting_time(args: List[str]) -> Tuple[Optional[datetime.datetime], Op
         "MDT": ("America/Denver", "Mountain Daylight Time"),
         "PST": ("America/Los_Angeles", "Pacific Standard Time"),
         "PDT": ("America/Los_Angeles", "Pacific Daylight Time"),
+        "AKST": ("America/Anchorage", "Alaska Standard Time"),
+        "AKDT": ("America/Anchorage", "Alaska Daylight Time"),
+        "HST": ("Pacific/Honolulu", "Hawaii Standard Time"),
         "CET": ("Europe/Paris", "Central European Time"),
         "CEST": ("Europe/Paris", "Central European Summer Time"),
+        "EET": ("Europe/Athens", "Eastern European Time"),
+        "EEST": ("Europe/Athens", "Eastern European Summer Time"),
         "JST": ("Asia/Tokyo", "Japan Standard Time"),
         "IST": ("Asia/Kolkata", "India Standard Time"),
+        "AEST": ("Australia/Sydney", "Australian Eastern Standard Time"),
+        "AEDT": ("Australia/Sydney", "Australian Eastern Daylight Time"),
+        "ACST": ("Australia/Adelaide", "Australian Central Standard Time"),
+        "ACDT": ("Australia/Adelaide", "Australian Central Daylight Time"),
+        "AWST": ("Australia/Perth", "Australian Western Standard Time"),
+        "NZST": ("Pacific/Auckland", "New Zealand Standard Time"),
+        "NZDT": ("Pacific/Auckland", "New Zealand Daylight Time"),
     }
 
     parts = time_str.split()

@@ -74,7 +74,7 @@ def main(args: Optional[List[str]] = None):
         user = os.getlogin()
     except Exception:
         user = "user"
-    console.print(f"[bold blue]{greeting}, {user}! Welcome to Global Time Utility 🌐[/bold blue]")
+    console.print(f"[bold blue]{greeting}, {user}![/bold blue]")
 
     if not args:
         print_favorites(favs)
@@ -182,16 +182,15 @@ def main(args: Optional[List[str]] = None):
             return
         meeting_time, timezone_info = parse_meeting_time(args)
         if meeting_time is None:
-            console.print(
-                "[red]Invalid meeting command. Use: 'meeting at/on <time>' "
-                "(e.g. 'meeting at 10:00 AM', 'meeting at 15:30 UTC', or "
-                "'meeting on 3 PM EST').[/red]"
-            )
-            console.print("[yellow]See 'gtime -h' for help.[/yellow]")
+            console.print("[red]Invalid meeting command.[/red]")
+            console.print("[yellow]Try:[/yellow] gtime meeting at \"10:00 AM\"  |  gtime meeting at \"15:30\" UTC")
+            console.print("[yellow]Help:[/yellow] gtime -h")
             return
         print_favorites(favs, meeting_time)
         if timezone_info:
-            console.print(f"\n[dim]✓ Meeting time converted from {timezone_info}[/dim]")
+            console.print(
+                f"\n[bold green]✓ Meeting time converted from {timezone_info} to local time[/bold green]\n"
+            )
         return
 
     if cmd == "compare" and len(args) > 1:
@@ -221,7 +220,9 @@ def main(args: Optional[List[str]] = None):
     if city_info:
         print_city_time(*city_info)
     else:
-        console.print("[red]Invalid command or city not found. See 'gtime -h' for help.[/red]")
+        console.print("[red]Invalid command or city not found.[/red]")
+        console.print("[yellow]Try:[/yellow] gtime Tokyo  |  gtime add London  |  gtime list")
         suggestions = suggest_cities(" ".join(args))
         if suggestions:
             console.print(f"[yellow]Did you mean:[/yellow] {', '.join(suggestions)}")
+        console.print("[yellow]Help:[/yellow] gtime -h")
