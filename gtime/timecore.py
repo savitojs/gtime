@@ -262,6 +262,7 @@ def parse_meeting_time(args: List[str]) -> Tuple[Optional[datetime.datetime], Op
 
     timezone_spec = None
     timezone_info = None
+    # Common abbreviations only; keep this list intentionally small and well-known.
     timezone_aliases = {
         "UTC": ("UTC", "Coordinated Universal Time"),
         "GMT": ("UTC", "Greenwich Mean Time"),

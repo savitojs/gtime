@@ -14,13 +14,30 @@ from typing import List, Optional
 from .render import console, print_city_time, print_compare, print_favorites
 from .search import get_city_by_name, suggest_cities
 from .storage import load_favorites, save_favorites
-from .timecore import get_greeting, parse_meeting_time
+from .timecore import format_utc_offset, get_greeting, parse_meeting_time
+
+
+def _print_header():
+    local_now = datetime.datetime.now().astimezone()
+    local_hour = local_now.hour
+    greeting = get_greeting(local_hour)
+    try:
+        user = os.getlogin()
+    except Exception:
+        user = "user"
+    local_compact = local_now.strftime("%a, %b %d %I:%M %p")
+    console.print(
+        f"[bold blue]{greeting}, {user}![/bold blue] "
+        f"[dim]• Local: {local_compact} ({format_utc_offset(local_now)})[/dim]",
+        justify="center",
+    )
 
 
 def watch_mode(func, *args, **kwargs):
     try:
         while True:
             os.system("clear")
+            _print_header()
             func(*args, **kwargs)
 
             for seconds_left in range(60, 0, -1):
@@ -37,27 +54,27 @@ def watch_mode(func, *args, **kwargs):
 
 def print_help():
     help_text = """
-[bold cyan]gtime - Global Time Utility[/bold cyan]
+[bold cyan]gtime[/bold cyan]  [dim]— Global Time Utility[/dim]
+[dim]Global time, minus the global headache. Compare, watch, and plan in one go.[/dim]
 
 [bold yellow]Usage:[/bold yellow]
   gtime [command] [arguments]
   gtime <city name>
 
 [bold yellow]Commands:[/bold yellow]
-  [green]add <city> [city2] ...[/green]     Add one or more cities to your favorites
-  [green]remove <city> [city2] ...[/green]  Remove one or more cities from your favorites
-  [green]list[/green]               List your favorite cities and their current times
-  [green]list --watch[/green]       Watch mode: continuously refresh your favorites list every 60 seconds
+  [green]add <city>...[/green] / [green]remove <city>...[/green]  Add or remove favorite cities
   [green]meeting at / on <time>[/green]  Show favorite cities' times for a meeting (e.g. 'meeting at 10:00 AM', 'meeting at 15:30 UTC', or 'meeting on 3 PM EST')
-  [green]compare <city1> <city2> ...[/green]  Compare times for multiple cities
-  [green]compare <city1> <city2> ... --watch[/green]  Watch mode: continuously refresh city comparison
+  [green]compare <city1> <city2> ... [--watch][/green]  Compare times (use --watch for live refresh)
   [green]watch[/green]              Same as 'list --watch' - watch your favorites in real-time
   [green]<city name>[/green]        Show the current time for any city (fuzzy search supported)
   [green]-h, --help[/green]         Show this help message
 
 [bold yellow]Watch Mode:[/bold yellow]
-  Use [green]--watch[/green] with list or compare commands, or use [green]watch[/green] alone to continuously
-  refresh the display every 60 seconds with a live countdown timer. Press Ctrl+C to exit.
+  Use [green]compare --watch[/green] for live comparison, or [green]watch[/green] / [green]--watch[/green]
+  to continuously refresh your favorites every 60 seconds. Press Ctrl+C to exit.
+
+[bold yellow]Notes:[/bold yellow]
+  [green]Δ Local[/green] shows the time difference from your local timezone.
 """
     console.print(help_text)
 
@@ -68,13 +85,7 @@ def main(args: Optional[List[str]] = None):
         print_help()
         return
     favs = load_favorites()
-    local_hour = datetime.datetime.now().hour
-    greeting = get_greeting(local_hour)
-    try:
-        user = os.getlogin()
-    except Exception:
-        user = "user"
-    console.print(f"[bold blue]{greeting}, {user}![/bold blue]")
+    _print_header()
 
     if not args:
         print_favorites(favs)
@@ -82,7 +93,7 @@ def main(args: Optional[List[str]] = None):
 
     cmd = args[0].lower()
 
-    if cmd == "watch" or (cmd == "list" and len(args) > 1 and args[1] == "--watch"):
+    if cmd == "watch":
         watch_mode(print_favorites, favs)
         return
     if cmd == "compare" and (len(args) > 2 and args[-1] == "--watch"):
@@ -173,7 +184,8 @@ def main(args: Optional[List[str]] = None):
         return
 
     if cmd == "list":
-        print_favorites(favs)
+        console.print("[red]The 'list' command has been removed.[/red]")
+        console.print("[yellow]Use:[/yellow] gtime  |  gtime watch")
         return
 
     if cmd == "meeting":
@@ -189,7 +201,8 @@ def main(args: Optional[List[str]] = None):
         print_favorites(favs, meeting_time)
         if timezone_info:
             console.print(
-                f"\n[bold green]✓ Meeting time converted from {timezone_info} to local time[/bold green]\n"
+                f"\n[bold green]✓ Meeting time converted from {timezone_info} to local time[/bold green]\n",
+                justify="center",
             )
         return
 
@@ -221,8 +234,9 @@ def main(args: Optional[List[str]] = None):
         print_city_time(*city_info)
     else:
         console.print("[red]Invalid command or city not found.[/red]")
-        console.print("[yellow]Try:[/yellow] gtime Tokyo  |  gtime add London  |  gtime list")
         suggestions = suggest_cities(" ".join(args))
         if suggestions:
             console.print(f"[yellow]Did you mean:[/yellow] {', '.join(suggestions)}")
+        else:
+            console.print("[yellow]Try:[/yellow] gtime Tokyo  |  gtime add London  |  gtime list")
         console.print("[yellow]Help:[/yellow] gtime -h")

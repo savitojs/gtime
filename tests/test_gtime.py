@@ -38,14 +38,14 @@ def test_help():
 
 def test_add_and_list_favorite():
     run_cli("add", "London")
-    out = run_cli("list")
+    out = run_cli()
     assert "London" in out.stdout
     assert "UK" in out.stdout
 
 def test_remove_favorite():
     run_cli("add", "London")
     run_cli("remove", "London")
-    out = run_cli("list")
+    out = run_cli()
     assert "London" not in out.stdout
 
 def test_city_lookup():
@@ -70,7 +70,7 @@ def test_invalid_city():
     assert "Invalid command" in out.stdout or "Did you mean" in out.stdout
 
 def test_no_favorites():
-    out = run_cli("list")
+    out = run_cli()
     assert "No favorite cities" in out.stdout
 
 def test_fuzzy_exact_match_priority():
@@ -254,11 +254,11 @@ def test_original_fuzzy_search():
 
 def test_original_favorites_workflow():
     run_cli("add", "Tokyo")
-    out = run_cli("list")
+    out = run_cli()
     assert "Tokyo" in out.stdout
 
     run_cli("remove", "Tokyo")
-    out = run_cli("list")
+    out = run_cli()
     assert "Tokyo" not in out.stdout
 
 def test_meeting_with_favorites_and_timezone():

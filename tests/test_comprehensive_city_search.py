@@ -8,6 +8,7 @@ Tests all city and country combinations to ensure search accuracy.
 
 import pytest
 
+# This file is intended to be run manually to generate a report.
 pytest.skip("Comprehensive search report is a manual script, not a pytest suite.", allow_module_level=True)
 
 import sys
