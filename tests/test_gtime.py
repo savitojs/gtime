@@ -107,49 +107,49 @@ def test_24_hour_format_basic():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "15:30")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
 
 def test_24_hour_format_evening():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "21:00")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
 
 def test_24_hour_format_morning():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "09:00")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
 
 def test_12_hour_format_still_works():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "3:30", "PM")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
 
 def test_hour_only_24_format():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "15")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
 
 def test_hour_only_12_format():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "3", "PM")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
 
 def test_utc_timezone():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "15:30", "UTC")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
     assert "converted from" in out.stdout
     assert "Coordinated Universal Time" in out.stdout
@@ -158,7 +158,7 @@ def test_est_timezone():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "10:00", "AM", "EST")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
     assert "converted from" in out.stdout
     assert "Eastern Standard Time" in out.stdout
@@ -167,7 +167,7 @@ def test_pst_timezone():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "2:00", "PM", "PST")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
     assert "converted from" in out.stdout
     assert "Pacific Standard Time" in out.stdout
@@ -176,7 +176,7 @@ def test_jst_timezone():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "9:00", "AM", "JST")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
     assert "converted from" in out.stdout
     assert "Japan Standard Time" in out.stdout
@@ -185,7 +185,7 @@ def test_cet_timezone():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "14:00", "CET")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "London" in out.stdout
     assert "converted from" in out.stdout
     assert "Central European Time" in out.stdout
@@ -194,14 +194,14 @@ def test_timezone_conversion_message():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "10:00", "AM", "UTC")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "converted from" in out.stdout
 
 def test_timezone_explanation_shown():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "15:30", "JST")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "converted from" in out.stdout
     assert "Japan Standard Time" in out.stdout
 
@@ -209,21 +209,21 @@ def test_24_hour_with_timezone():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "15:30", "UTC")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "converted from" in out.stdout
 
 def test_12_hour_with_timezone():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "3:30", "PM", "EST")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "converted from" in out.stdout
 
 def test_hour_only_with_timezone():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "15", "UTC")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
     assert "converted from" in out.stdout
 
 def test_invalid_timezone():
@@ -246,7 +246,7 @@ def test_original_meeting_format():
     run_cli("add", "London", "Tokyo")
     out = run_cli("meeting", "at", "10:00", "AM")
     assert out.returncode == 0
-    assert "Meeting time (local)" in out.stdout
+    assert "Meeting:" in out.stdout
 
 def test_original_fuzzy_search():
     out = run_cli("Londn")

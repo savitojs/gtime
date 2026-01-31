@@ -19,6 +19,7 @@ from .timecore import (
     ZoneInfo,
     convert_meeting_time,
     format_utc_offset,
+    format_time_delta,
     get_funny_footer,
     get_greeting,
     get_time_emoji,
@@ -32,6 +33,15 @@ def _format_local_time(dt: datetime.datetime, long_format: bool = False) -> str:
     if long_format:
         return dt.strftime("%A, %B %d, %Y %I:%M %p")
     return dt.strftime("%a, %b %d %I:%M %p")
+
+
+def _format_day_shift(base_dt: datetime.datetime, target_dt: datetime.datetime) -> str:
+    day_delta = (target_dt.date() - base_dt.date()).days
+    if day_delta == 0:
+        return ""
+    if day_delta > 0:
+        return f"+{day_delta} day" if day_delta == 1 else f"+{day_delta} days"
+    return f"{day_delta} day" if day_delta == -1 else f"{day_delta} days"
 
 
 def print_city_time(city, country, tz, emoji, meeting_time: Optional[datetime.datetime] = None):
@@ -56,17 +66,27 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
         console.print("[red]No favorite cities set. Use 'gtime add <city>' to add one.[/red]")
         console.print("[yellow]Use 'gtime <city>' to search one and 'gtime --help' for more info[/yellow]")
         return
+    local_now = datetime.datetime.now().astimezone()
+    local_header = f"{_format_local_time(local_now, long_format=True)} ({format_utc_offset(local_now)})"
     if meeting_time:
         local_meeting = to_local_aware(meeting_time)
         console.print(
-            f"[dim]Meeting time (local): {_format_local_time(local_meeting, long_format=True)}[/dim]"
+            f"[dim]{local_header}[/dim]\n[bold cyan]Meeting: {_format_local_time(local_meeting, long_format=True)} (local)[/bold cyan]\n"
         )
+    else:
+        console.print(f"[dim]{local_header}[/dim]\n")
     table = Table(title=None, show_lines=True, box=ROUNDED, expand=False)
     table.add_column("Flag", style="bold", justify="center")
     table.add_column("City", style="bold cyan")
-    table.add_column("Local Time", style="green")
+    table.add_column("Local Time (UTC)", style="green")
+    table.add_column("Day", style="blue")
+    table.add_column("Δ Local", style="cyan")
     table.add_column("Phase", style="magenta")
-    table.add_column("UTC Offset", style="yellow")
+    base_local = (
+        to_local_aware(meeting_time)
+        if meeting_time
+        else datetime.datetime.now().astimezone()
+    )
     for fav in favs:
         city_info = get_city_by_name(fav)
         if not city_info:
@@ -78,12 +98,16 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
         emoji_time = get_time_emoji(hour)
         phase = get_greeting(hour)
         offset_str = format_utc_offset(dt)
+        delta_str = format_time_delta(base_local, dt)
+        local_time = _format_local_time(dt, long_format=False)
+        day_shift = _format_day_shift(base_local, dt)
         table.add_row(
             emoji,
             f"{city}, {country}",
-            _format_local_time(dt, long_format=meeting_time is not None),
+            f"{local_time} ({offset_str})",
+            day_shift,
+            delta_str,
             f"{emoji_time} {phase}",
-            offset_str,
         )
     fun_facts = [
         "Did you know? There are 24 time zones in the world! 🌐",
@@ -106,6 +130,20 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
         "The first country to see the new year is Kiribati! 🎉",
         "GMT and UTC are almost the same but not exactly! ⏱️",
         "Some countries have changed time zones for political reasons! 🗳️",
+        "India uses a single time zone despite spanning 2,900+ km east to west. 🇮🇳",
+        "There are time zones with 15-minute offsets, like UTC+12:45 in New Zealand’s Chatham Islands. ⏲️",
+        "The UTC offset can change with daylight saving time, even in the same city. 🌞",
+        "Not all countries observe daylight saving time. 🗓️",
+        "The International Date Line roughly follows the 180° longitude. 🧭",
+        "Some countries have moved time zones for political or economic reasons. 🗺️",
+        "Half-hour time zones are common in places like India and Australia. ⏰",
+        "UTC is based on atomic time, not the Sun. ⚛️",
+        "Antarctica uses multiple time zones based on research stations. 🧊",
+        "Local solar noon rarely matches 12:00 PM on the clock. ☀️",
+        "Daylight saving time can shift clocks by one hour in summer. ⏳",
+        "Time zones help keep noon close to when the Sun is highest in the sky. 🌤️",
+        "Some islands use time zones to stay aligned with trading partners. 🏝️",
+        "The Unix epoch starts at 1970-01-01 00:00:00 UTC. 🧮",
     ]
     footer = random.choice(fun_facts)
     panel = Panel(
