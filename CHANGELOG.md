@@ -10,15 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Features
 
-* sort favorites by UTC offset and refactor test helpers ([#1](https://github.com/savitojs/gtime/issues/1)) ([937c78b](https://github.com/savitojs/gtime/commit/937c78b07e9f5fdd3632e8616902555b9f722aeb))
+* sort favorites by UTC offset and refactor test helpers ([#1](https://github.com/savitojs/gtime/issues/1)) ([72f9664](https://github.com/savitojs/gtime/commit/72f9664c95ac9f3bcc45477a628976c54d8beafd))
 
 ## [0.4.0](https://github.com/savitojs/gtime/compare/v0.3.5...v0.4.0) (2026-02-01)
 
 
 ### Features
 
-* polish output and align compare layout ([911d499](https://github.com/savitojs/gtime/commit/911d4998d95f8cfe18e3da165044edcc148fc44e))
-* tune meeting output and improve hints ([26e4774](https://github.com/savitojs/gtime/commit/26e4774560d72b3858bca70dd02c593ecdd4c4ca))
+* polish output and align compare layout ([afc8ed9](https://github.com/savitojs/gtime/commit/afc8ed9e7b19a2721a77e54b9d1295e09bc3b90d))
+* tune meeting output and improve hints ([83fa5ea](https://github.com/savitojs/gtime/commit/83fa5ea0c988e8c21ca44fe5e3302725fcf814c6))
 
 ## [0.3.5] - 2025-07-14
 
