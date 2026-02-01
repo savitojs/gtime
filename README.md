@@ -1,7 +1,7 @@
 # 🌍 Global Time Utility (gtime)
 
-[![PyPI version](https://badge.fury.io/py/gtime.svg)](https://badge.fury.io/py/gtime)
-[![Python Support](https://img.shields.io/pypi/pyversions/gtime.svg)](https://pypi.org/project/gtime/)
+[![PyPI version](https://badge.fury.io/py/gtime.svg?maxAge=0)](https://badge.fury.io/py/gtime)
+[![Python Support](https://img.shields.io/pypi/pyversions/gtime.svg?maxAge=0)](https://pypi.org/project/gtime/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > **A modern, colorful Python CLI utility for global time zone lookup, comparison, and management**
@@ -36,9 +36,9 @@ uv tool install gtime
 
 ### In a virtual environment
 ```bash
-uv venv
+uv venv .venv
 source .venv/bin/activate
-uv pip install gtime
+pip install gtime
 ```
 
 ### From source
@@ -59,7 +59,7 @@ gtime London
 gtime add Tokyo Singapore "New York"
 
 # See all your favorite cities at once
-gtime list
+gtime
 
 # Compare times across multiple cities
 gtime compare London Tokyo Sydney
@@ -90,14 +90,13 @@ gtime watch
 ```bash
 gtime add "Los Angeles" Berlin Mumbai    # Add multiple cities
 gtime remove Tokyo                       # Remove a city
-gtime list                              # View all favorites
-gtime clear                             # Clear all favorites
+gtime                                   # View all favorites
 ```
 
 ### 🔍 Multi-City Comparison
 ```bash
 gtime compare London Tokyo "New York"   # Compare specific cities
-gtime compare                           # Compare all favorites
+gtime                                   # Show all favorites (sorted by UTC offset)
 ```
 
 ### 📅 Meeting Time Conversion
@@ -110,8 +109,8 @@ gtime meeting at "9:00 AM EST"         # Shows "Eastern Standard Time (EST)"
 
 ### 👀 Live Watch Mode
 ```bash
-gtime watch                             # Monitor all favorites
-gtime watch London Tokyo                # Watch specific cities
+gtime watch                             # Monitor all favorites (live updates every 60s)
+gtime compare London Tokyo --watch      # Watch specific cities
 ```
 
 ### 🌐 Timezone Support
@@ -141,11 +140,10 @@ gtime newyork                   # Finds New York
 # Build your favorite cities list
 gtime add London Tokyo "San Francisco" Berlin
 gtime add Mumbai                # Add one more
-gtime list                      # See your collection
+gtime                           # See your collection
 
 # Remove cities you no longer need
 gtime remove Berlin
-gtime clear                     # Start fresh
 ```
 
 ### Advanced Features
@@ -166,23 +164,20 @@ gtime watch                     # Live updates every second
 
 ### Using uv (recommended)
 ```bash
-uv venv
+uv venv .venv
 source .venv/bin/activate
-uv sync --extra dev
+uv sync
 
 # Optional: update lockfile
 uv lock
 
 # Run tests
-uv run pytest
+pytest tests/
 ```
 
 ### Running Tests
 ```bash
-uv run pytest tests/
-
-# Run performance tests
-uv run python tests/perf/profile_lookup.py
+pytest tests/
 ```
 
 ### Contributing
@@ -199,7 +194,7 @@ We welcome contributions! Here's how to get started:
 ## 🚀 GitHub Actions
 
 This project includes automated workflows:
-- **🧪 Tests**: Runs on every push/PR across Python 3.8-3.12
+- **🧪 Tests**: Runs on every push/PR across Python 3.9-3.12
 - **📦 Publish**: Automatically publishes to PyPI upon new GitHub release
 
 ## 🤝 Support
