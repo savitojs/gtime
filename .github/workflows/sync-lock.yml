@@ -1,0 +1,35 @@
+name: Sync lock file
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - pyproject.toml
+
+permissions:
+  contents: write
+
+jobs:
+  sync-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Check and update lock file
+        run: |
+          uv lock
+
+      - name: Commit lock file if changed
+        run: |
+          if [[ -n $(git diff uv.lock) ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add uv.lock
+            git commit -m "chore: sync uv.lock with pyproject.toml
+
+Automatically update lock file when pyproject.toml changes (e.g., from release-please)."
+            git push
+          fi
