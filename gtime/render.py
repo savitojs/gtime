@@ -60,7 +60,7 @@ def print_city_time(city, country, tz, emoji, meeting_time: Optional[datetime.da
     table.add_row(f"[yellow]{dt.strftime('%I:%M %p')} {emoji_time}  ([white]{offset_str}[/white])[/yellow]")
     table.add_row("")
     table.add_row(f"[italic magenta]{footer}[/italic magenta]")
-    console.print(Align.center(Panel(table, title=f"{greeting}!", expand=False)))
+    console.print(Align.left(Panel(table, title=f"{greeting}!", expand=False)))
 
 
 def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] = None):
@@ -71,8 +71,7 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
     if meeting_time:
         local_meeting = to_local_aware(meeting_time)
         console.print(
-            f"[bold cyan]Meeting: {_format_local_time(local_meeting, long_format=False)} (local)[/bold cyan]",
-            justify="center",
+            f"[bold cyan]Meeting: {_format_local_time(local_meeting, long_format=False)} (local)[/bold cyan]"
         )
     base_local = (
         to_local_aware(meeting_time)
@@ -172,11 +171,7 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
         box=ROUNDED,
         expand=False,
     )
-    panel_width = console.measure(panel).maximum
-    line_width = min(panel_width, console.width)
-    left_pad = max((console.width - line_width) // 2, 0)
-    console.print("[dim]" + (" " * left_pad) + ("─" * line_width) + "[/dim]")
-    console.print(Align.center(panel))
+    console.print(Align.left(panel))
 
 
 def print_compare(cities: List[str]):
@@ -275,8 +270,4 @@ def print_compare(cities: List[str]):
         box=ROUNDED,
         expand=False,
     )
-    panel_width = console.measure(panel).maximum
-    line_width = min(panel_width, console.width)
-    left_pad = max((console.width - line_width) // 2, 0)
-    console.print("[dim]" + (" " * left_pad) + ("─" * line_width) + "[/dim]")
-    console.print(Align.center(panel))
+    console.print(Align.left(panel))

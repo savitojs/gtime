@@ -28,9 +28,9 @@ def _print_header():
     local_compact = local_now.strftime("%a, %b %d %I:%M %p")
     console.print(
         f"[bold blue]{greeting}, {user}![/bold blue] "
-        f"[dim]• Local: {local_compact} ({format_utc_offset(local_now)})[/dim]",
-        justify="center",
+        f"[dim]• Local: {local_compact} ({format_utc_offset(local_now)})[/dim]"
     )
+    console.print()
 
 
 def watch_mode(func, *args, **kwargs):
@@ -201,8 +201,7 @@ def main(args: Optional[List[str]] = None):
         print_favorites(favs, meeting_time)
         if timezone_info:
             console.print(
-                f"\n[bold green]✓ Meeting time converted from {timezone_info} to local time[/bold green]\n",
-                justify="center",
+                f"\n[bold green]✓ Meeting time converted from {timezone_info} to local time[/bold green]\n"
             )
         return
 
