@@ -94,6 +94,8 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
         delta_str = format_time_delta(base_local, dt)
         local_time = _format_local_time(dt, long_format=False)
         day_shift = _format_day_shift(base_local, dt)
+        offset = dt.utcoffset()
+        offset_minutes = offset.total_seconds() / 60 if offset is not None else float('inf')
         rows.append(
             {
                 "emoji": emoji,
@@ -102,8 +104,10 @@ def print_favorites(favs: List[str], meeting_time: Optional[datetime.datetime] =
                 "day_shift": day_shift,
                 "delta": delta_str,
                 "phase": f"{emoji_time} {phase}",
+                "offset_minutes": offset_minutes,
             }
         )
+    rows.sort(key=lambda x: x["offset_minutes"], reverse=True)
     show_day = any(row["day_shift"] for row in rows)
     table = Table(title=None, show_lines=True, box=ROUNDED, expand=False)
     table.add_column("Flag", style="bold", justify="center")

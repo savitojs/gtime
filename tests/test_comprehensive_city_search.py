@@ -59,7 +59,7 @@ def identify_capitals(country_to_cities):
 
     return capitals
 
-def test_city_searches(cities):
+def run_city_searches(cities):
     """Test searching for all cities."""
     results = []
 
@@ -90,7 +90,7 @@ def test_city_searches(cities):
 
     return results
 
-def test_country_searches(countries, capitals):
+def run_country_searches(countries, capitals):
     """Test searching for all countries."""
     results = []
 
@@ -136,7 +136,7 @@ def test_country_searches(countries, capitals):
 
     return results
 
-def test_fuzzy_searches(cities, countries):
+def run_fuzzy_searches(cities, countries):
     """Test fuzzy search with variations and typos."""
     results = []
 
@@ -199,7 +199,7 @@ def test_fuzzy_searches(cities, countries):
 
     return results
 
-def test_case_sensitivity(cities, countries):
+def run_case_sensitivity(cities, countries):
     """Test case insensitive searches."""
     results = []
 
@@ -246,7 +246,7 @@ def test_case_sensitivity(cities, countries):
 
     return results
 
-def test_suggestions(cities, countries):
+def run_suggestions(cities, countries):
     """Test suggestion functionality."""
     results = []
 
@@ -508,27 +508,27 @@ def main():
     all_results = []
 
     print("🔍 Testing exact city searches...")
-    city_results = test_city_searches(cities)
+    city_results = run_city_searches(cities)
     all_results.extend(city_results)
     print(f"✅ Tested {len(city_results)} city searches")
 
     print("🌍 Testing country searches...")
-    country_results = test_country_searches(countries, capitals)
+    country_results = run_country_searches(countries, capitals)
     all_results.extend(country_results)
     print(f"✅ Tested {len(country_results)} country searches")
 
     print("🔤 Testing fuzzy searches...")
-    fuzzy_results = test_fuzzy_searches(cities, countries)
+    fuzzy_results = run_fuzzy_searches(cities, countries)
     all_results.extend(fuzzy_results)
     print(f"✅ Tested {len(fuzzy_results)} fuzzy searches")
 
     print("🔠 Testing case sensitivity...")
-    case_results = test_case_sensitivity(cities, countries)
+    case_results = run_case_sensitivity(cities, countries)
     all_results.extend(case_results)
     print(f"✅ Tested {len(case_results)} case sensitivity tests")
 
     print("💡 Testing suggestion system...")
-    suggestion_results = test_suggestions(cities, countries)
+    suggestion_results = run_suggestions(cities, countries)
     all_results.extend(suggestion_results)
     print(f"✅ Tested {len(suggestion_results)} suggestion tests")
 

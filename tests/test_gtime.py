@@ -274,3 +274,38 @@ def test_fuzzy_search_with_favorites():
 def test_compare_with_improved_search():
     out = run_cli("compare", "pairs", "toky")
     assert out.returncode == 0
+
+def test_favorites_sorted_by_utc_offset():
+    """Test that favorites are sorted by UTC offset descending (highest first)."""
+    # Add cities with different UTC offsets
+    run_cli("add", "Sydney")      # UTC+11
+    run_cli("add", "Tokyo")       # UTC+9
+    run_cli("add", "London")      # UTC+0
+    run_cli("add", "New York")    # UTC-5
+    run_cli("add", "Dubai")       # UTC+4
+
+    out = run_cli()
+
+    # Extract positions of cities in output
+    sydney_pos = out.stdout.find("Sydney")
+    tokyo_pos = out.stdout.find("Tokyo")
+    dubai_pos = out.stdout.find("Dubai")
+    london_pos = out.stdout.find("London")
+    newyork_pos = out.stdout.find("New York")
+
+    # All cities should be found
+    assert sydney_pos > 0, "Sydney not found in output"
+    assert tokyo_pos > 0, "Tokyo not found in output"
+    assert dubai_pos > 0, "Dubai not found in output"
+    assert london_pos > 0, "London not found in output"
+    assert newyork_pos > 0, "New York not found in output"
+
+    # Verify descending UTC offset order
+    # Sydney (UTC+11) should come before Tokyo (UTC+9)
+    assert sydney_pos < tokyo_pos, "Sydney should appear before Tokyo"
+    # Tokyo (UTC+9) should come before Dubai (UTC+4)
+    assert tokyo_pos < dubai_pos, "Tokyo should appear before Dubai"
+    # Dubai (UTC+4) should come before London (UTC+0)
+    assert dubai_pos < london_pos, "Dubai should appear before London"
+    # London (UTC+0) should come before New York (UTC-5)
+    assert london_pos < newyork_pos, "London should appear before New York"
