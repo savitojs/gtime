@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.1.0 (2026-02-01)
+
+
+### Features
+
+* Enhanced fuzzy search, 24-hour format, and timezone support ([72bef82](https://github.com/savitojs/gtime/commit/72bef82a37a16fda26c9b902e1e43dea147bb3ac))
+* Global Time CLI Utility (gtime) ([c0d3434](https://github.com/savitojs/gtime/commit/c0d34341a3e30fb5917d08147bffea2092d0aee7))
+* improve terminal compatibility and code cleanup v0.3.4 ([7a97252](https://github.com/savitojs/gtime/commit/7a9725235f6f2e903943f1d5086c414c8ca8fb30))
+* left-align all output and improve spacing ([291a88e](https://github.com/savitojs/gtime/commit/291a88e090fe189043e4c299a146510fd87b0381))
+* minor improvements ([9a7bb95](https://github.com/savitojs/gtime/commit/9a7bb956a858dbd47629fcb8824fc6fd9d39924c))
+* polish output and align compare layout ([afc8ed9](https://github.com/savitojs/gtime/commit/afc8ed9e7b19a2721a77e54b9d1295e09bc3b90d))
+* sort favorites by UTC offset and refactor test helpers ([#1](https://github.com/savitojs/gtime/issues/1)) ([72f9664](https://github.com/savitojs/gtime/commit/72f9664c95ac9f3bcc45477a628976c54d8beafd))
+* tune meeting output and improve hints ([83fa5ea](https://github.com/savitojs/gtime/commit/83fa5ea0c988e8c21ca44fe5e3302725fcf814c6))
+
+
+### Bug Fixes
+
+* clock emoji breaks output on kitty and ghostty ([0df6905](https://github.com/savitojs/gtime/commit/0df690591005ed75da5564bf5245def13c434133))
+* improve add command feedback to show country-to-capital mapping ([9ab2f1d](https://github.com/savitojs/gtime/commit/9ab2f1df2e88736dc14b796b1d92aa8aaf300899))
+* improve add command messaging to be more natural and explanatory ([f1b2970](https://github.com/savitojs/gtime/commit/f1b297097e0e37dd508b175789f114acae0d5013))
+* remove unsupported uv manager from renovate config ([218ca27](https://github.com/savitojs/gtime/commit/218ca27bd62ec8d2f5125bcf91f23eb57666a59e))
+* remove unsupported uv manager from renovate config ([a6ff9dc](https://github.com/savitojs/gtime/commit/a6ff9dc18ec6ab7ea431e3c309899cdd68f38224))
+* removed screenshot section; added demo already ([d1879df](https://github.com/savitojs/gtime/commit/d1879dfb25da87418bbb74d384c32d56f03a916b))
+* update uv.lock to match current pyproject.toml ([4075010](https://github.com/savitojs/gtime/commit/40750100d9e6576aa58b7df9c32d848f70894c6c))
+
 ## [0.5.0](https://github.com/savitojs/gtime/compare/v0.4.0...v0.5.0) (2026-02-01)
 
 
