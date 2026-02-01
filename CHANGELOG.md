@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0](https://github.com/savitojs/gtime/compare/v0.5.0...v0.6.0) (2026-02-01)
+
+
+### Features
+
+* left-align all output and improve spacing ([291a88e](https://github.com/savitojs/gtime/commit/291a88e090fe189043e4c299a146510fd87b0381))
+
+
+### Bug Fixes
+
+* remove unsupported uv manager from renovate config ([218ca27](https://github.com/savitojs/gtime/commit/218ca27bd62ec8d2f5125bcf91f23eb57666a59e))
+* remove unsupported uv manager from renovate config ([a6ff9dc](https://github.com/savitojs/gtime/commit/a6ff9dc18ec6ab7ea431e3c309899cdd68f38224))
+
 ## [0.5.0](https://github.com/savitojs/gtime/compare/v0.4.0...v0.5.0) (2026-02-01)
 
 
