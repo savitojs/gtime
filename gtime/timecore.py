@@ -9,10 +9,7 @@ import datetime
 import os
 from typing import List, Optional, Tuple
 
-try:
-    from zoneinfo import ZoneInfo
-except ImportError:
-    from pytz import timezone as ZoneInfo
+from zoneinfo import ZoneInfo
 
 
 def _is_terminal_compatible() -> bool:
