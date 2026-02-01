@@ -36,6 +36,12 @@ dependencies = [
     "pytz; python_version < '3.9'"
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytz"
+]
+
 [project.urls]
 Homepage = "https://github.com/savitojs/gtime"
 Repository = "https://github.com/savitojs/gtime"
