@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1](https://github.com/savitojs/gtime/compare/v0.5.0...v0.5.1) (2026-02-01)
+
+
+### Bug Fixes
+
+* remove unsupported uv manager from renovate config ([2d55813](https://github.com/savitojs/gtime/commit/2d55813ef0578db58f992b633a52861903d51afd))
+* remove unsupported uv manager from renovate config ([a52dadf](https://github.com/savitojs/gtime/commit/a52dadfbf223433c92c255c7d2c6bfaaa12e610c))
+
 ## [0.5.0](https://github.com/savitojs/gtime/compare/v0.4.0...v0.5.0) (2026-02-01)
 
 
