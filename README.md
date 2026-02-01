@@ -29,16 +29,24 @@ If gtime helps you manage time zones more efficiently, please consider giving it
 
 ## 📦 Installation
 
-### From PyPI (Recommended)
+### With uv (recommended)
 ```bash
-pip install gtime
+uv tool install gtime
 ```
 
-### From Source
+### In a virtual environment
+```bash
+uv venv
+source .venv/bin/activate
+uv pip install gtime
+```
+
+### From source
 ```bash
 git clone https://github.com/savitojs/gtime.git
 cd gtime
-pip install .
+uv sync
+uv run gtime --help
 ```
 
 ## 🚀 Quick Start
@@ -156,16 +164,25 @@ gtime watch                     # Live updates every second
 
 ## 🛠️ Development
 
-### Running Tests
+### Using uv (recommended)
 ```bash
-# Install development dependencies
-pip install -r requirements.txt
+uv venv
+source .venv/bin/activate
+uv sync --extra dev
+
+# Optional: update lockfile
+uv lock
 
 # Run tests
-pytest tests/
+uv run pytest
+```
+
+### Running Tests
+```bash
+uv run pytest tests/
 
 # Run performance tests
-python tests/perf/profile_lookup.py
+uv run python tests/perf/profile_lookup.py
 ```
 
 ### Contributing

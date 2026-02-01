@@ -49,6 +49,7 @@ coverage.xml
 env/
 venv/
 ENV/
+.tmp/
 
 # PyInstaller
 *.manifest

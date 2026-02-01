@@ -1,6 +1,33 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "group:allNonMajor",
+    "schedule:weekly"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "labels": ["dependencies"],
+  "timezone": "UTC",
+  "dependencyDashboard": true,
+  "enabledManagers": ["pep621", "uv"],
+  "packageRules": [
+    {
+      "matchManagers": ["pep621"],
+      "groupName": "python dependencies",
+      "groupSlug": "python-deps"
+    },
+    {
+      "matchManagers": ["pep621", "uv"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "matchManagers": ["uv"],
+      "groupName": "uv lockfile",
+      "groupSlug": "uv-lock"
+    }
   ]
 }
