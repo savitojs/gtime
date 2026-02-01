@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0](https://github.com/savitojs/gtime/compare/v0.3.5...v0.4.0) (2026-02-01)
+
+
+### Features
+
+* left-align all output and improve spacing ([291a88e](https://github.com/savitojs/gtime/commit/291a88e090fe189043e4c299a146510fd87b0381))
+* polish output and align compare layout ([afc8ed9](https://github.com/savitojs/gtime/commit/afc8ed9e7b19a2721a77e54b9d1295e09bc3b90d))
+* sort favorites by UTC offset and refactor test helpers ([#1](https://github.com/savitojs/gtime/issues/1)) ([72f9664](https://github.com/savitojs/gtime/commit/72f9664c95ac9f3bcc45477a628976c54d8beafd))
+* tune meeting output and improve hints ([83fa5ea](https://github.com/savitojs/gtime/commit/83fa5ea0c988e8c21ca44fe5e3302725fcf814c6))
+
+
+### Bug Fixes
+
+* remove unsupported uv manager from renovate config ([218ca27](https://github.com/savitojs/gtime/commit/218ca27bd62ec8d2f5125bcf91f23eb57666a59e))
+* remove unsupported uv manager from renovate config ([a6ff9dc](https://github.com/savitojs/gtime/commit/a6ff9dc18ec6ab7ea431e3c309899cdd68f38224))
+* update uv.lock to match current pyproject.toml ([4075010](https://github.com/savitojs/gtime/commit/40750100d9e6576aa58b7df9c32d848f70894c6c))
+
 ## [0.5.0](https://github.com/savitojs/gtime/compare/v0.4.0...v0.5.0) (2026-02-01)
 
 
