@@ -11,7 +11,7 @@
   "labels": ["dependencies"],
   "timezone": "UTC",
   "dependencyDashboard": true,
-  "enabledManagers": ["pep621", "uv"],
+  "enabledManagers": ["pep621"],
   "packageRules": [
     {
       "matchManagers": ["pep621"],
@@ -19,15 +19,10 @@
       "groupSlug": "python-deps"
     },
     {
-      "matchManagers": ["pep621", "uv"],
+      "matchManagers": ["pep621"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
       "automergeType": "pr"
-    },
-    {
-      "matchManagers": ["uv"],
-      "groupName": "uv lockfile",
-      "groupSlug": "uv-lock"
     }
   ]
 }
