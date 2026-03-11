@@ -31,6 +31,11 @@ header() {
 }
 
 # ── Backup and reset favorites for clean demo ──
+restore_favorites() {
+    cp ~/.gtime_favorites.json.demo-backup ~/.gtime_favorites.json 2>/dev/null
+    rm -f ~/.gtime_favorites.json.demo-backup
+}
+trap restore_favorites EXIT INT TERM
 cp ~/.gtime_favorites.json ~/.gtime_favorites.json.demo-backup 2>/dev/null
 echo '[]' > ~/.gtime_favorites.json
 
@@ -146,6 +151,4 @@ echo -e "🌟 ${GREEN}Star it if you find it useful!${NC}"
 echo
 sleep "$PAUSE_LONG"
 
-# ── Restore original favorites ──
-cp ~/.gtime_favorites.json.demo-backup ~/.gtime_favorites.json 2>/dev/null
-rm -f ~/.gtime_favorites.json.demo-backup
+# Favorites restored automatically by EXIT trap
