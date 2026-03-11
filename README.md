@@ -77,7 +77,7 @@ gtime watch
 
 ![demo](./assets/demo.gif)
 
-*Note: Some command output may appear broken in the demo, but it works perfectly in real terminal usage*
+*Note: Demo recorded in [Ghostty](https://ghostty.org/). Some command output may appear broken in the GIF, but it works perfectly in real terminal usage. Best experience with Ghostty or [Kitty](https://sw.kovidgoyal.net/kitty/)*
 
 ## 🎯 Features
 
@@ -159,6 +159,78 @@ gtime meeting at "3 PM UTC"     # Timezone support for global teams
 # Real-time monitoring
 gtime watch                     # Live updates every second
 ```
+
+## 🖥️ GNOME Desktop Widget
+
+Display your favorite cities' times directly on your GNOME desktop using the [Desktop Widgets (azclock)](https://extensions.gnome.org/extension/5156/desktop-clock/) extension.
+
+![gtime desktop widget](./assets/widget-screenshot.png)
+
+### Widget Styles
+
+```bash
+gtime widget        # Style A (default) - flags, color-coded time, status
+gtime widget a      # Same as above
+gtime widget b      # Grouped by status (Working, Sleeping, etc.)
+gtime widget c      # Compact cards with hour diff from local
+```
+
+**Style A** - Flags + color-coded time + status:
+```
+🇺🇸 New York   23:05       ● Sleeping  UTC-4
+🇨🇿 Brno       04:05  +1d  ● Sleeping  UTC+1
+🇮🇳 Delhi      09:35  +1d  ● Working   UTC+5:30
+🇦🇺 Melbourne  14:05  +1d  ● Working   UTC+11
+```
+
+**Style B** - Grouped by status:
+```
+💻 Working
+  🇮🇳 Delhi      09:35  +1d
+  🇦🇺 Melbourne  14:05  +1d
+💤 Sleeping
+  🇺🇸 New York   23:05
+  🇨🇿 Brno       04:05  +1d
+```
+
+**Style C** - Compact cards:
+```
+🇺🇸 New York  🌙
+   23:05  ● Sleeping  local
+🇮🇳 Delhi  🌅
+   09:35  +1d  ● Working  +9.5h
+```
+
+### Setup with azclock
+
+1. Install the [Desktop Widgets](https://extensions.gnome.org/extension/5156/desktop-clock/) GNOME extension
+2. Open Desktop Widgets settings (right-click any widget -> Settings)
+3. Add a widget and add a **Command Label** element
+4. Set the command to: `gtime widget a` (or `b` / `c` for other styles)
+5. Enable **Polling** with interval `60000` (1 minute)
+6. Customize font, colors, and position to your liking
+
+A reference dconf config is included at `gtime/widget-azclock-sidebar.dconf` with the full sidebar layout (clock + weather + gtime).
+
+```bash
+# Back up your current config first!
+dconf dump /org/gnome/shell/extensions/azclock/ > backup.dconf
+
+# Import the sidebar layout
+dconf load /org/gnome/shell/extensions/azclock/ < gtime/widget-azclock-sidebar.dconf
+```
+
+### Visual Features
+
+- **Country flags** for every city
+- **Color-coded time**: green = business hours, amber = transitional, blue-grey = sleeping
+- **Work status indicators**: Working, Lunch, Early, Off, Sleeping
+- **Day difference**: `+1d` / `-1d` when a city is on a different date
+- **Hour diff from local** (Style C): shows `+5h`, `+9.5h`, `local`
+
+### Customizing the Widget Module
+
+The widget logic lives in `gtime/widget.py`. You can modify styles, add new ones, or adjust colors by editing the style functions (`_style_a`, `_style_b`, `_style_c`). New styles can be registered in the `STYLES` dict at the bottom of the file.
 
 ## 🛠️ Development
 

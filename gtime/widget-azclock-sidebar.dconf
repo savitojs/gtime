@@ -1,0 +1,89 @@
+# gtime + azclock Sidebar Widget - Full dconf dump
+#
+# This is the complete sidebar configuration combining:
+#   - Digital clock (date + time)
+#   - Weather forecast
+#   - gtime world clock (with rainbow header)
+#
+# Screenshot: assets/widget-screenshot.png
+#
+# HOW TO USE:
+#   To import this exact sidebar layout into azclock:
+#     dconf load /org/gnome/shell/extensions/azclock/ < widget-azclock-sidebar.dconf
+#
+#   WARNING: This will overwrite your existing azclock config.
+#   Back up first with: dconf dump /org/gnome/shell/extensions/azclock/ > backup.dconf
+#
+# REQUIREMENTS:
+#   - GNOME Shell 45+ with azclock extension installed
+#   - gtime installed (pip install gtime)
+#   - Weather location set to New York (change locations= for your city)
+#
+# CUSTOMIZATION:
+#   - Change 'gtime widget b' to 'gtime widget a' or 'gtime widget c' for different styles
+#   - Change the echo line to customize the header text
+#   - Adjust font-size, foreground-color, background-color as desired
+
+[/]
+create-initial-widget=false
+widgets=[{'be740295-b76d-4abe-b85b-40d7d227a577': <{'enabled': <true>}>}]
+
+[widget-data/be740295-b76d-4abe-b85b-40d7d227a577]
+background-color='rgba(20, 20, 40, 0.70)'
+border-radius=20
+convert-old-location-done=true
+elements=[{'6220e4e7-8c50-46ae-8520-86cf1ced3683': <{'enabled': <true>}>}, {'dfa11f17-f894-4861-bc14-386baeb62be5': <{'enabled': <true>}>}, {'a93b5f84-63d2-41e4-8a46-675583f5f765': <{'enabled': <true>}>}, {'f3a34420-439a-4bb3-9e46-de662eb0cf3e': <{'enabled': <true>}>}]
+location-data='{"monitorIndex":0,"relativeX":0.009,"relativeY":0.07}'
+lock-widget=true
+name='Sidebar'
+padding=(20, 24, 20, 24)
+show-background=true
+show-border=false
+spacing=20
+vertical=true
+
+[widget-data/be740295-b76d-4abe-b85b-40d7d227a577/element-data/6220e4e7-8c50-46ae-8520-86cf1ced3683]
+date-format='%A %b %d'
+font-size=32
+name='Date Label'
+text-align-x='Start'
+
+[widget-data/be740295-b76d-4abe-b85b-40d7d227a577/element-data/dfa11f17-f894-4861-bc14-386baeb62be5]
+date-format='%I\u2236%M\u2236%S %p'
+font-size=50
+name='Time Label'
+text-align-x='Start'
+text-align-y='Center'
+
+[widget-data/be740295-b76d-4abe-b85b-40d7d227a577/element-data/a93b5f84-63d2-41e4-8a46-675583f5f765]
+current-weather-icon-type='Full_Color'
+daily-weather-icon-type='Full_Color'
+element-type='Weather_Element'
+locations=[<(uint32 2, <('New York', 'KNYC', true, [(0.71180344078725644, -1.2909618758762367)], [(0.71059804659265924, -1.2916478949920254)])>)>]
+margin=(12, 0, 0, 0)
+max-daily-forecasts=5
+name='Weather Forecast'
+polling-interval=300
+show-current-apparent-temp=true
+show-current-conditions=true
+show-current-summary=true
+show-daily-forecast=true
+show-location=true
+temperature-unit='Celsius'
+
+[widget-data/be740295-b76d-4abe-b85b-40d7d227a577/element-data/f3a34420-439a-4bb3-9e46-de662eb0cf3e]
+command=echo "(⌐■_■) it's <a href='https://github.com/savitojs/gtime'><span foreground='#5bcefa'><b>g</b></span><span foreground='#73c991'><b>t</b></span><span foreground='#e8c36a'><b>i</b></span><span foreground='#f0ad4e'><b>m</b></span><span foreground='#c9a0dc'><b>e</b></span></a>"; echo "";gtime widget b
+element-type='Command_Label'
+font-size=15
+font-weight=400
+foreground-color='white'
+line-alignment='Start'
+margin=(12, 0, 0, 0)
+name='gtime'
+padding=(0, 0, 0, 0)
+polling-enabled=true
+polling-interval=60000
+shadow=(true, 'rgba(0, 0, 0, 0.4)', 0, 1, 0, 3)
+show-background=false
+show-border=false
+text-align-x='Start'

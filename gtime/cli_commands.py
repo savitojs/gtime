@@ -15,6 +15,7 @@ from .render import console, print_city_time, print_compare, print_favorites
 from .search import get_city_by_name, suggest_cities
 from .storage import load_favorites, save_favorites
 from .timecore import format_utc_offset, get_greeting, parse_meeting_time
+from .widget import run_widget
 
 
 def _print_header():
@@ -66,6 +67,7 @@ def print_help():
   [green]meeting at / on <time>[/green]  Show favorite cities' times for a meeting (e.g. 'meeting at 10:00 AM', 'meeting at 15:30 UTC', or 'meeting on 3 PM EST')
   [green]compare <city1> <city2> ... [--watch][/green]  Compare times (use --watch for live refresh)
   [green]watch[/green]              Same as 'list --watch' - watch your favorites in real-time
+  [green]widget [a|b|c][/green]     Output Pango-markup for GNOME desktop widget (azclock)
   [green]<city name>[/green]        Show the current time for any city (fuzzy search supported)
   [green]-h, --help[/green]         Show this help message
 
@@ -84,14 +86,20 @@ def main(args: Optional[List[str]] = None):
     if args and args[0] in ("-h", "--help"):
         print_help()
         return
+
+    cmd = args[0].lower() if args else None
+
+    # Widget outputs raw Pango markup - skip header and Rich formatting
+    if cmd == "widget":
+        run_widget(args[1:])
+        return
+
     favs = load_favorites()
     _print_header()
 
     if not args:
         print_favorites(favs)
         return
-
-    cmd = args[0].lower()
 
     if cmd == "watch":
         watch_mode(print_favorites, favs)

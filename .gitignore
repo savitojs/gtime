@@ -76,7 +76,3 @@ Thumbs.db
 
 # Test and profiling artifacts
 profile_lookup.pyc
-
-# Ignore demo files
-assets/demo.sh
-assets/demo.yml
