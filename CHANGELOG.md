@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0](https://github.com/savitojs/gtime/compare/v0.6.0...v0.7.0) (2026-03-11)
+
+
+### Features
+
+* add desktop widget command for GNOME azclock extension ([e9893b5](https://github.com/savitojs/gtime/commit/e9893b54d7317a711be465eb8458805df7e9a078))
+
 ## [0.6.0](https://github.com/savitojs/gtime/compare/v0.5.0...v0.6.0) (2026-02-01)
 
 
