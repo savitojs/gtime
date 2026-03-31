@@ -6,14 +6,14 @@ on:
     - cron: '30 1 * * 6'  # Weekly Saturday 1:30 AM UTC
   workflow_dispatch:
 
-permissions:
-  contents: read
-  security-events: write
-  id-token: write
+permissions: read-all
 
 jobs:
   scorecard:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
