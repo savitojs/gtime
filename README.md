@@ -5,11 +5,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/savitojs/gtime/badge)](https://scorecard.dev/viewer/?uri=github.com/savitojs/gtime)
 
-A modern, colorful Python CLI for global time zone lookup, comparison, and management. Fuzzy search, favorites, live updates, meeting time conversion, and beautiful terminal output.
+**Stop Googling time zones.**
 
 ![demo](./assets/demo.gif)
 
 *Recorded in [Ghostty](https://ghostty.org/). Some output may look off in the GIF but works perfectly in a real terminal. Best with Ghostty or [Kitty](https://sw.kovidgoyal.net/kitty/).*
+
+> If this saves you from one more "what time is it in Tokyo?" search, [give it a star](https://github.com/savitojs/gtime).
+
+A modern, colorful Python CLI for global time zone lookup, comparison, and management. Fuzzy search, favorites, live updates, meeting time conversion, and beautiful terminal output.
 
 ## Installation
 
@@ -139,6 +143,6 @@ MIT - see [LICENSE](LICENSE).
 
 ---
 
-If gtime helps you, consider giving it a [star](https://github.com/savitojs/gtime)! [Report bugs](https://github.com/savitojs/gtime/issues) or [request features](https://github.com/savitojs/gtime/issues).
+[Report bugs](https://github.com/savitojs/gtime/issues) or [request features](https://github.com/savitojs/gtime/issues).
 
 **Made with ❤️ for developers working across time zones**
