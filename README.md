@@ -3,6 +3,7 @@
 [![PyPI version](https://badge.fury.io/py/gtime.svg?maxAge=0)](https://badge.fury.io/py/gtime)
 [![Python Support](https://img.shields.io/pypi/pyversions/gtime.svg?maxAge=0)](https://pypi.org/project/gtime/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/savitojs/gtime/badge)](https://scorecard.dev/viewer/?uri=github.com/savitojs/gtime)
 
 > **A modern, colorful Python CLI utility for global time zone lookup, comparison, and management**
 
