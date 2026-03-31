@@ -117,7 +117,7 @@ def main(args: Optional[List[str]] = None):
             city_info = get_city_by_name(city_arg)
             if city_info:
                 city, *_ = city_info
-                if city not in favs:
+                if city.lower() not in [f.lower() for f in favs]:
                     favs.append(city)
                     # Show mapping if user input differs from resolved city
                     if city_arg.lower() != city.lower():
@@ -164,21 +164,34 @@ def main(args: Optional[List[str]] = None):
         not_in_favs = []
 
         for city_arg in args[1:]:
-            if city_arg in favs:
-                favs.remove(city_arg)
-                removed_cities.append(city_arg)
+            # Try exact match first, then resolve via search (case-insensitive)
+            matched = None
+            for fav in favs:
+                if fav.lower() == city_arg.lower():
+                    matched = fav
+                    break
+            if not matched:
+                city_info = get_city_by_name(city_arg)
+                if city_info:
+                    city, *_ = city_info
+                    if city in favs:
+                        matched = city
+            if matched:
+                favs.remove(matched)
+                if city_arg.lower() != matched.lower():
+                    removed_cities.append(f"searched {city_arg}, removed {matched}")
+                else:
+                    removed_cities.append(matched)
             else:
                 not_in_favs.append(city_arg)
 
         if removed_cities:
             save_favorites(favs)
-            if len(removed_cities) == 1:
-                console.print(f"[green]Removed {removed_cities[0]} from favorites.[/green]")
-            else:
-                console.print(
-                    f"[green]Removed {len(removed_cities)} cities from favorites: "
-                    f"{', '.join(removed_cities)}[/green]"
-                )
+            for city_msg in removed_cities:
+                if city_msg.startswith("searched"):
+                    console.print(f"[green]{city_msg}[/green]")
+                else:
+                    console.print(f"[green]Removed {city_msg} from favorites.[/green]")
 
         if not_in_favs:
             if len(not_in_favs) == 1:
