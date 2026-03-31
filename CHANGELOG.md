@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0](https://github.com/savitojs/gtime/compare/v0.7.1...v0.8.0) (2026-03-31)
+
+
+### Features
+
+* add OpenSSF Scorecard and dependency review workflows ([c1c6227](https://github.com/savitojs/gtime/commit/c1c622741977701fede5abecb32468e69ee9d9b3))
+
+
+### Bug Fixes
+
+* improve OpenSSF Scorecard score ([af476fd](https://github.com/savitojs/gtime/commit/af476fd4dc928a2a062cfbe0f4412ce2624d3925))
+* improve OpenSSF Scorecard score ([c92beaf](https://github.com/savitojs/gtime/commit/c92beaf6fe382260b6c6850111fcbaa026853fe1))
+* scope scorecard workflow permissions to job level ([c435964](https://github.com/savitojs/gtime/commit/c43596488447b8f0f51fb663ff99026c490a1816))
+* use correct commit SHAs for pinned GitHub Actions ([646d500](https://github.com/savitojs/gtime/commit/646d500a38763fed42ba1a415ed97af7a416640c))
+* use correct commit SHAs for pinned GitHub Actions ([6b48551](https://github.com/savitojs/gtime/commit/6b48551609742c4e522cc9af09e7a0576d28287e))
+
+
+### Documentation
+
+* improve README with hook, demo-first layout, and star callout ([595b42c](https://github.com/savitojs/gtime/commit/595b42c3c507ea65306c40fa0b076a42e778b31a))
+* streamline README and reduce clutter ([8dcd356](https://github.com/savitojs/gtime/commit/8dcd3568c75537d308d8c4aceb11b5b2fe856cde))
+
 ## [0.7.1](https://github.com/savitojs/gtime/compare/v0.7.0...v0.7.1) (2026-03-31)
 
 
