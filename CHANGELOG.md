@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.1](https://github.com/savitojs/gtime/compare/v0.8.0...v0.8.1) (2026-03-31)
+
+
+### Bug Fixes
+
+* scope workflow permissions and add SLSA provenance ([00ffb74](https://github.com/savitojs/gtime/commit/00ffb7417d22ce50b8a20c178e15c2440a2bd3e4))
+* scope workflow permissions to job level and add SLSA provenance ([9f40769](https://github.com/savitojs/gtime/commit/9f4076904d4df47ea3003a9cff5fc1dfd7055783))
+
 ## [0.8.0](https://github.com/savitojs/gtime/compare/v0.7.1...v0.8.0) (2026-03-31)
 
 
