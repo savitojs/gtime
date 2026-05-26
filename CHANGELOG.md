@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.2](https://github.com/savitojs/gtime/compare/v0.8.1...v0.8.2) (2026-05-26)
+
+
+### Bug Fixes
+
+* remove custom CodeQL workflow, repo uses default setup ([5cbc321](https://github.com/savitojs/gtime/commit/5cbc321daa5e80d9ae2fa58a2e2c707734bd9d80))
+* upgrade pytest&gt;=9.0.3 (CVE-2025-71176), drop Python 3.9, add CodeQL ([e4292b8](https://github.com/savitojs/gtime/commit/e4292b8ab650cac8dffdd215d472e1aa32161231))
+* upgrade pytest&gt;=9.0.3 (CVE-2025-71176), drop Python 3.9, add CodeQL SAST workflow ([ec0d26b](https://github.com/savitojs/gtime/commit/ec0d26b36cd11ee054cde56dd9ca025800fbfc7f))
+
 ## [0.8.1](https://github.com/savitojs/gtime/compare/v0.8.0...v0.8.1) (2026-03-31)
 
 
